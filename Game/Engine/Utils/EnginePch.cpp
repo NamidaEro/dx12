@@ -1,7 +1,12 @@
 #include "pch.h"
 #include "EnginePch.h"
 
-__declspec(dllexport) void HelloEngine()
+#include "../Engine/Engine.h"
+
+
+unique_ptr<Engine> GEngine;
+
+const Engine* GetEngine()
 {
-	
+	return GEngine.get();
 }

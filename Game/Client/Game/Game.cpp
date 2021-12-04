@@ -1,11 +1,12 @@
 #include "pch.h"
 #include "Game.h"
 
-#include "EnginePch.h"
+#include "Utils/EnginePch.h"
+#include "Engine/Engine.h"
 
 void Game::Init()
 {
-	HelloEngine();
+	GetEngine();
 }
 
 void Game::Update()
