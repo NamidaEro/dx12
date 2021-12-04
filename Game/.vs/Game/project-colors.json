@@ -1,0 +1,16 @@
+{
+  "Version": 1,
+  "ProjectMap": {
+    "8aef551c-0a95-45f2-93c6-96409e3e4eef": {
+      "ProjectGuid": "8aef551c-0a95-45f2-93c6-96409e3e4eef",
+      "DisplayName": "Client",
+      "ColorIndex": 0
+    },
+    "afe83423-be07-4fa8-adc8-30aca81d274f": {
+      "ProjectGuid": "afe83423-be07-4fa8-adc8-30aca81d274f",
+      "DisplayName": "Engine",
+      "ColorIndex": 1
+    }
+  },
+  "NextColorIndex": 2
+}
