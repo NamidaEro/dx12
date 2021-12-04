@@ -68,3 +68,12 @@ Game/Client/x64/Debug/Client.tlog/rc.read.1.tlog
 Game/Client/x64/Debug/Client.tlog/rc.write.1.tlog
 Game/Client/x64/Debug/vc143.idb
 Game/Client/x64/Debug/vc143.pdb
+*.json
+Game/.vs/Game/v17/.suo
+*.db
+Game/Output/Client.pdb
+Game/Output/d3dx12.h
+Game/Output/Engine.exp
+Game/Output/Engine.h
+Game/Output/Engine.pdb
+Game/Output/EnginePch.h

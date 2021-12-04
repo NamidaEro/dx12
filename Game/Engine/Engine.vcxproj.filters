@@ -20,13 +20,16 @@
     <ClInclude Include="framework.h">
       <Filter>소스 파일</Filter>
     </ClInclude>
-    <ClInclude Include="Engine.h">
+    <ClInclude Include="Engine\Engine.h">
       <Filter>Engine</Filter>
     </ClInclude>
     <ClInclude Include="pch.h">
       <Filter>Utils</Filter>
     </ClInclude>
-    <ClInclude Include="EnginePch.h">
+    <ClInclude Include="Utils\EnginePch.h">
+      <Filter>Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="Utils\d3dx12.h">
       <Filter>Utils</Filter>
     </ClInclude>
   </ItemGroup>
@@ -34,13 +37,13 @@
     <ClCompile Include="dllmain.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="Engine.cpp">
+    <ClCompile Include="Engine\Engine.cpp">
       <Filter>Engine</Filter>
     </ClCompile>
     <ClCompile Include="pch.cpp">
       <Filter>Utils</Filter>
     </ClCompile>
-    <ClCompile Include="EnginePch.cpp">
+    <ClCompile Include="Utils\EnginePch.cpp">
       <Filter>Utils</Filter>
     </ClCompile>
   </ItemGroup>

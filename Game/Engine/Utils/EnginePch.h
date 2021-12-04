@@ -27,7 +27,7 @@ using namespace Microsoft::WRL;
 #pragma comment(lib, "d3d12")
 #pragma comment(lib, "dxgi")
 #pragma comment(lib, "dxguid")
-#pragma comment(lib, "d3compiler")
+#pragma comment(lib, "d3dcompiler")
 
 using int8			= __int8;
 using int16			= __int16;
@@ -41,3 +41,5 @@ using vector2		= XMFLOAT2;
 using vector3		= XMFLOAT3;
 using vector4		= XMFLOAT4;
 using matrix		= XMMATRIX;
+
+__declspec(dllexport) void HelloEngine();
