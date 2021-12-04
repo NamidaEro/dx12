@@ -20,48 +20,55 @@
     <ClInclude Include="framework.h">
       <Filter>소스 파일</Filter>
     </ClInclude>
-    <ClInclude Include="Engine\Engine.h">
+    <ClInclude Include="CommandQueue.h">
+      <Filter>Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="d3dx12.h">
+      <Filter>Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="DescriptorHeap.h">
+      <Filter>Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="Device.h">
+      <Filter>Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="Macros.h">
+      <Filter>Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="SwapChain.h">
+      <Filter>Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="EnginePch.h">
+      <Filter>Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine.h">
       <Filter>Engine</Filter>
     </ClInclude>
-    <ClInclude Include="pch.h">
-      <Filter>Utils</Filter>
-    </ClInclude>
-    <ClInclude Include="Utils\EnginePch.h">
-      <Filter>Utils</Filter>
-    </ClInclude>
-    <ClInclude Include="Utils\d3dx12.h">
-      <Filter>Utils</Filter>
-    </ClInclude>
-    <ClInclude Include="Engine\CommandQueue.h" />
-    <ClInclude Include="Engine\Device.h" />
-    <ClInclude Include="Engine\SwapChain.h" />
-    <ClInclude Include="Engine\DescriptorHeap.h" />
-    <ClInclude Include="Utils\Macros.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="dllmain.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="Engine\Engine.cpp">
-      <Filter>Engine</Filter>
-    </ClCompile>
     <ClCompile Include="pch.cpp">
       <Filter>Utils</Filter>
     </ClCompile>
-    <ClCompile Include="Utils\EnginePch.cpp">
+    <ClCompile Include="DescriptorHeap.cpp">
       <Filter>Utils</Filter>
     </ClCompile>
-    <ClCompile Include="Engine\CommandQueue.cpp">
-      <Filter>소스 파일</Filter>
+    <ClCompile Include="Device.cpp">
+      <Filter>Utils</Filter>
     </ClCompile>
-    <ClCompile Include="Engine\Device.cpp">
-      <Filter>소스 파일</Filter>
+    <ClCompile Include="SwapChain.cpp">
+      <Filter>Utils</Filter>
     </ClCompile>
-    <ClCompile Include="Engine\SwapChain.cpp">
-      <Filter>소스 파일</Filter>
+    <ClCompile Include="CommandQueue.cpp">
+      <Filter>Utils</Filter>
     </ClCompile>
-    <ClCompile Include="Engine\DescriptorHeap.cpp">
-      <Filter>소스 파일</Filter>
+    <ClCompile Include="Engine.cpp">
+      <Filter>Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="EnginePch.cpp">
+      <Filter>Utils</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

@@ -32,7 +32,7 @@
     <ClInclude Include="pch.h">
       <Filter>소스 파일\Utils</Filter>
     </ClInclude>
-    <ClInclude Include="Game\Game.h">
+    <ClInclude Include="Game.h">
       <Filter>소스 파일\Game</Filter>
     </ClInclude>
   </ItemGroup>
@@ -56,7 +56,7 @@
     <ClCompile Include="pch.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="Game\Game.cpp">
+    <ClCompile Include="Game.cpp">
       <Filter>소스 파일\Game</Filter>
     </ClCompile>
   </ItemGroup>
