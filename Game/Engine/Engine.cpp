@@ -26,6 +26,7 @@ void Engine::Init(const WindoInfo& window)
 	_descHeap = make_shared<DescriptorHeap>();
 
 	_device->Init();
+	_cmdQueue->Init(_device->GetDevice(), _swapChain, _descHeap);
 }
 
 void Engine::Render()
