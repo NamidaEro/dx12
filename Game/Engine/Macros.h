@@ -1,12 +1,10 @@
 #pragma once
 
-
+#ifdef _EXPORT
 #define EXPORTCLASS __declspec(dllexport)
+#else
+#define EXPORTCLASS
+#endif
 
-struct WindowInfo
-{
-	HWND	hwnd;
-	int32	width;
-	int32	height;
-	bool	isWindow;
-};
+
+

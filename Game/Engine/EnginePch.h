@@ -42,12 +42,15 @@ using vector3		= XMFLOAT3;
 using vector4		= XMFLOAT4;
 using matrix		= XMMATRIX;
 
+struct WindowInfo
+{
+	HWND	hwnd;
+	int32	width;
+	int32	height;
+	bool	isWindow;
+};
+
 enum
 {
 	SWAP_CHAIN_BUFFER_COUNT = 2
 };
-
-class __declspec(dllexport) Engine;
-extern unique_ptr<Engine> GEngine;
-
-__declspec(dllexport) const Engine* GetEngine();

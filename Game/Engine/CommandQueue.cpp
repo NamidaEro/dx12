@@ -47,6 +47,46 @@ void CommandQueue::WaitSync()
 	}
 }
 
+void CommandQueue::RenderBegin(const D3D12_VIEWPORT* vp, const D3D12_RECT* rect)
+{
+	_cmdAlloc->Reset();
+	_cmdList->Reset(_cmdAlloc.Get(), nullptr);
+
+	D3D12_RESOURCE_BARRIER barrier = CD3DX12_RESOURCE_BARRIER::Transition(
+		_swapChain->GetCurrentBackBufferResource().Get(),
+		D3D12_RESOURCE_STATE_PRESENT,
+		D3D12_RESOURCE_STATE_RENDER_TARGET);
+
+	_cmdList->ResourceBarrier(1, &barrier);
+
+	_cmdList->RSSetViewports(1, vp);
+	_cmdList->RSSetScissorRects(1, rect);
+
+	D3D12_CPU_DESCRIPTOR_HANDLE backBufferView = _descHeap->GetBackBufferView();
+	_cmdList->ClearRenderTargetView(backBufferView, Colors::LightSteelBlue, 0, nullptr);
+	_cmdList->OMSetRenderTargets(1, &backBufferView, FALSE, nullptr);
+}
+
+void CommandQueue::RenderEnd()
+{
+	D3D12_RESOURCE_BARRIER barrier = CD3DX12_RESOURCE_BARRIER::Transition(
+		_swapChain->GetCurrentBackBufferResource().Get(),
+		D3D12_RESOURCE_STATE_RENDER_TARGET,
+		D3D12_RESOURCE_STATE_PRESENT);
+
+	_cmdList->ResourceBarrier(1, &barrier);
+	_cmdList->Close();
+
+	ID3D12CommandList* cmdListArr[] = { _cmdList.Get() };
+	_cmdQueue->ExecuteCommandLists(_countof(cmdListArr), cmdListArr);
+
+	_swapChain->Present();
+
+	WaitSync();
+
+	_swapChain->SwapIndex();
+}
+
 CommandQueue::~CommandQueue()
 {
 	::CloseHandle(_fenceEvent);

@@ -1,14 +1,17 @@
 #include "pch.h"
 #include "Game.h"
 
-#include "Utils/EnginePch.h"
-#include "Engine/Engine.h"
-
-void Game::Init()
+void Game::Init(const WindowInfo& window)
 {
-	GetEngine();
+	if(_engine == nullptr)
+	{
+		_engine = make_unique<Engine>();
+	}
+	
+	_engine->Init(window);
 }
 
 void Game::Update()
 {
+	_engine->Render();
 }
