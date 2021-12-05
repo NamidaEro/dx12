@@ -42,6 +42,11 @@ using vector3		= XMFLOAT3;
 using vector4		= XMFLOAT4;
 using matrix		= XMMATRIX;
 
+enum
+{
+	SWAP_CHAIN_BUFFER_COUNT = 2
+};
+
 class __declspec(dllexport) Engine;
 extern unique_ptr<Engine> GEngine;
 

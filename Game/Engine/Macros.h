@@ -3,7 +3,7 @@
 
 #define EXPORTCLASS __declspec(dllexport)
 
-struct WindoInfo
+struct WindowInfo
 {
 	HWND	hwnd;
 	int32	width;
