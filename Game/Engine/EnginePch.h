@@ -1,5 +1,11 @@
 #pragma once
 
+#ifdef _EXPORT
+#define EXPORTCLASS __declspec(dllexport)
+#else
+#define EXPORTCLASS
+#endif
+
 #include <Windows.h>
 #include <tchar.h>
 #include <memory>
@@ -48,6 +54,12 @@ struct WindowInfo
 	int32	width;
 	int32	height;
 	bool	isWindow;
+};
+
+struct Vertex
+{
+	vector3 pos;
+	vector4 color;
 };
 
 enum

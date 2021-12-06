@@ -1,7 +1,28 @@
 #include "pch.h"
 #include "SwapChain.h"
 
-void SwapChain::Init(const WindowInfo& window, ComPtr<IDXGIFactory> dxgi, ComPtr<ID3D12CommandQueue> cmdQueue)
+void SwapChain::Init(const WindowInfo& window, ComPtr<ID3D12Device> device, ComPtr<IDXGIFactory> dxgi, ComPtr<ID3D12CommandQueue> cmdQueue)
+{
+	_device = device;
+
+	CreateSwapChain(window, dxgi, cmdQueue);
+
+	CreateRTV(device);
+}
+
+void SwapChain::Present()
+{
+	_swapChain->Present(0, 0);
+}
+
+void SwapChain::SwapIndex()
+{
+	_backBufferIndex = (_backBufferIndex + 1) % SWAP_CHAIN_BUFFER_COUNT;
+}
+
+
+void SwapChain::CreateSwapChain(const WindowInfo& window, ComPtr<IDXGIFactory> dxgi,
+	ComPtr<ID3D12CommandQueue> cmdQueue)
 {
 	_swapChain.Reset();
 
@@ -24,18 +45,29 @@ void SwapChain::Init(const WindowInfo& window, ComPtr<IDXGIFactory> dxgi, ComPtr
 
 	dxgi->CreateSwapChain(cmdQueue.Get(), &sd, &_swapChain);
 
-	for(int32 i = 0; i < SWAP_CHAIN_BUFFER_COUNT; ++i)
+	for (int32 i = 0; i < SWAP_CHAIN_BUFFER_COUNT; ++i)
 	{
-		_swapChain->GetBuffer(i, IID_PPV_ARGS(&_renderTargets[i]));
+		_swapChain->GetBuffer(i, IID_PPV_ARGS(&_rtvBuffer[i]));
 	}
 }
 
-void SwapChain::Present()
+void SwapChain::CreateRTV(ComPtr<ID3D12Device> device)
 {
-	_swapChain->Present(0, 0);
-}
+	int32 rtvHeapSize = device->GetDescriptorHandleIncrementSize(D3D12_DESCRIPTOR_HEAP_TYPE_RTV);
 
-void SwapChain::SwapIndex()
-{
-	_backBufferIndex = (_backBufferIndex + 1) % SWAP_CHAIN_BUFFER_COUNT;
+	D3D12_DESCRIPTOR_HEAP_DESC desc;
+	desc.Type = D3D12_DESCRIPTOR_HEAP_TYPE_RTV;
+	desc.NumDescriptors = SWAP_CHAIN_BUFFER_COUNT;
+	desc.Flags = D3D12_DESCRIPTOR_HEAP_FLAG_NONE;
+	desc.NodeMask = 0;
+
+	device->CreateDescriptorHeap(&desc, IID_PPV_ARGS(&_rtvHeap));
+
+	D3D12_CPU_DESCRIPTOR_HANDLE heapBeigin = _rtvHeap->GetCPUDescriptorHandleForHeapStart();
+
+	for (int i = 0; i < SWAP_CHAIN_BUFFER_COUNT; ++i)
+	{
+		_rtvHandle[i] = CD3DX12_CPU_DESCRIPTOR_HANDLE(heapBeigin, i * rtvHeapSize);
+		device->CreateRenderTargetView(_rtvBuffer[i].Get(), nullptr, _rtvHandle[i]);
+	}
 }

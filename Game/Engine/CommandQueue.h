@@ -6,14 +6,14 @@ class CommandQueue
 {
 public:
 	void Init(ComPtr<ID3D12Device> device
-		, shared_ptr<SwapChain> swapChain
-		, shared_ptr<DescriptorHeap> descHeap);
+		, shared_ptr<SwapChain> swapChain);
 	void WaitSync();
 
 	void RenderBegin(const D3D12_VIEWPORT* vp, const D3D12_RECT* rect);
 	void RenderEnd();
 
-	ComPtr<ID3D12CommandQueue> GetCmdQueue() { return _cmdQueue; }
+	const ComPtr<ID3D12CommandQueue> GetCmdQueue() { return _cmdQueue; }
+	const ComPtr<ID3D12GraphicsCommandList>	GetCmdList() { return _cmdList; }
 
 	~CommandQueue();
 
@@ -28,5 +28,7 @@ private:
 
 	shared_ptr<SwapChain>				_swapChain;
 	shared_ptr<DescriptorHeap>			_descHeap;
+
+	ComPtr<ID3D12Device>				_device;
 };
 

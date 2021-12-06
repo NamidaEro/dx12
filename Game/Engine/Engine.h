@@ -1,12 +1,20 @@
 #pragma once
 
-#include "Macros.h"
-
+class Device;
+class CommandQueue;
+class SwapChain;
+class RootSignature;
 class EXPORTCLASS Engine
 {
 public:
 	void Init(const WindowInfo& window);
 	void Render();
+
+public:
+	const shared_ptr<Device>				GetDeivce() { return _device; }
+	const shared_ptr<CommandQueue>		GetCommandQueue() { return _cmdQueue; }
+	const shared_ptr<SwapChain>			GetSwapChain() { return _swapChain;	}
+	const shared_ptr<RootSignature>			GetSignature() { return _rootSignature; }
 
 public:
 	void RenderBegin();
@@ -19,9 +27,9 @@ private:
 	D3D12_VIEWPORT						_viewport = {};
 	D3D12_RECT							_scissorRect = {};
 
-	shared_ptr<class Device>			_device;
-	shared_ptr<class CommandQueue>		_cmdQueue;
-	shared_ptr<class SwapChain>			_swapChain;
-	shared_ptr<class DescriptorHeap>	_descHeap;
+	shared_ptr<Device>			_device;
+	shared_ptr<CommandQueue>		_cmdQueue;
+	shared_ptr<SwapChain>			_swapChain;
+	shared_ptr<RootSignature>		_rootSignature;
 };
 
