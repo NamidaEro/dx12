@@ -3,13 +3,11 @@
 class RootSignature
 {
 public:
-	void Init(ComPtr<ID3D12Device> device);
+	void Init();
 
 	const ComPtr<ID3D12RootSignature> GetSignature() { return _signature; }
 
 private:
 	ComPtr<ID3D12RootSignature> _signature;
-
-	ComPtr<ID3D12Device> _device = nullptr;
 };
 

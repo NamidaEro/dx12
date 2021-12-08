@@ -3,4 +3,4 @@
 
 #include "Engine.h"
 
-unique_ptr<Engine> GlobalEngine = make_unique<Engine>();
+Engine* GlobalEngine = &(Engine::Instance());

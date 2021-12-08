@@ -26,6 +26,8 @@ using namespace std;
 #include <DirectXPackedVector.h>
 #include <DirectXColors.h>
 
+#include "Singleton.h"
+
 using namespace DirectX;
 using namespace DirectX::PackedVector;
 using namespace Microsoft::WRL;
@@ -66,3 +68,8 @@ enum
 {
 	SWAP_CHAIN_BUFFER_COUNT = 2
 };
+
+class EXPORTCLASS Engine;
+extern Engine* GlobalEngine;
+
+#include "Macros.h"

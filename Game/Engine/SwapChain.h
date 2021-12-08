@@ -3,10 +3,7 @@
 class SwapChain
 {
 public:
-	void Init(const WindowInfo& window
-		, ComPtr<ID3D12Device> device
-		, ComPtr<IDXGIFactory> dxgi
-		, ComPtr<ID3D12CommandQueue> cmdQueue);
+	void Init(const WindowInfo& window);
 	void Present();
 	void SwapIndex();
 
@@ -28,7 +25,5 @@ private:
 	D3D12_CPU_DESCRIPTOR_HANDLE		_rtvHandle[SWAP_CHAIN_BUFFER_COUNT];
 
 	uint32							_backBufferIndex = 0;
-
-	ComPtr<ID3D12Device>			_device = nullptr;
 };
 

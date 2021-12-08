@@ -1,13 +1,15 @@
 #include "pch.h"
 #include "SwapChain.h"
 
-void SwapChain::Init(const WindowInfo& window, ComPtr<ID3D12Device> device, ComPtr<IDXGIFactory> dxgi, ComPtr<ID3D12CommandQueue> cmdQueue)
+#include "CommandQueue.h"
+#include "Device.h"
+#include "Engine.h"
+
+void SwapChain::Init(const WindowInfo& window)
 {
-	_device = device;
+	CreateSwapChain(window, DEVICE->GetDXGI(), CMDQUEUE->GetCmdQueue());
 
-	CreateSwapChain(window, dxgi, cmdQueue);
-
-	CreateRTV(device);
+	CreateRTV(DEVICE->GetDevice());
 }
 
 void SwapChain::Present()

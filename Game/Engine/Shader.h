@@ -3,10 +3,7 @@
 class EXPORTCLASS Shader
 {
 public:
-	void Init(ComPtr<ID3D12Device> device
-		, ComPtr<ID3D12GraphicsCommandList> cmdList
-		, ComPtr<ID3D12RootSignature> signature
-		, const wstring& path);
+	void Init(const wstring& path);
 	void Update();
 
 private:
@@ -21,9 +18,5 @@ private:
 
 	ComPtr<ID3D12PipelineState> _pipelineState = nullptr;
 	D3D12_GRAPHICS_PIPELINE_STATE_DESC _pipelineDesc = {};
-
-	ComPtr<ID3D12Device> _device = nullptr;
-	ComPtr<ID3D12GraphicsCommandList> _cmdList = nullptr;
-	ComPtr<ID3D12RootSignature> _signature = nullptr;
 };
 

@@ -1,5 +1,8 @@
 #pragma once
 
-#define DEVICE GlobalEngine->GetDevice()->GetDevice();
+#define DEVICE		Engine::Instance().GetDeivce()
+#define SWAPCHAIN	Engine::Instance().GetSwapChain()
+#define SIGNATURE	Engine::Instance().GetSignature()
+#define CMDQUEUE	Engine::Instance().GetCommandQueue()
 
 

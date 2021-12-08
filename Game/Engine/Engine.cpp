@@ -6,6 +6,14 @@
 #include "SwapChain.h"
 #include "RootSignature.h"
 
+void Engine::Awake()
+{
+	_device = make_shared<Device>();
+	_cmdQueue = make_shared<CommandQueue>();
+	_swapChain = make_shared<SwapChain>();
+	_rootSignature = make_shared<RootSignature>();
+}
+
 void Engine::Init(const WindowInfo& window)
 {
 	_window = window;
@@ -18,36 +26,29 @@ void Engine::Init(const WindowInfo& window)
 		static_cast<FLOAT>(_window.width), static_cast<FLOAT>(_window.height)
 	};
 
-	_scissorRect = CD3DX12_RECT(0, 0, _window.width, _window.height);
+	_scissorRect = CD3DX12_RECT(0, 0, _window.width, _window.height);	
 
-	_device = make_shared<Device>();
-	_cmdQueue = make_shared<CommandQueue>();
-	_swapChain = make_shared<SwapChain>();
-	_rootSignature = make_shared<RootSignature>();
-
-	_device->Init();
-	_cmdQueue->Init(_device->GetDevice(), _swapChain);
-	_swapChain->Init(_window, _device->GetDevice(), _device->GetDXGI(), _cmdQueue->GetCmdQueue());
-	_rootSignature->Init(_device->GetDevice());
+	Instance().GetDeivce()->Init();
+	Instance().GetCommandQueue()->Init();
+	Instance().GetSwapChain()->Init(_window);
+	Instance().GetSignature()->Init();
 }
 
 void Engine::Render()
 {
 	RenderBegin();
 
-
-
 	RenderEnd();
 }
 
 void Engine::RenderBegin()
 {
-	_cmdQueue->RenderBegin(&_viewport, &_scissorRect);
+	Instance().GetCommandQueue()->RenderBegin(&_viewport, &_scissorRect);
 }
 
 void Engine::RenderEnd()
 {
-	_cmdQueue->RenderEnd();
+	Instance().GetCommandQueue()->RenderEnd();
 }
 
 void Engine::ResizeWindow(int32 width, int32 height)

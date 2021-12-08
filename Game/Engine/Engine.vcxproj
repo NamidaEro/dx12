@@ -213,6 +213,7 @@ del $(SolutionDir)Resources\Shader\*.*</Command>
     <ClInclude Include="Mesh.h" />
     <ClInclude Include="RootSignature.h" />
     <ClInclude Include="Shader.h" />
+    <ClInclude Include="Singleton.h" />
     <ClInclude Include="SwapChain.h" />
   </ItemGroup>
   <ItemGroup>
@@ -230,6 +231,7 @@ del $(SolutionDir)Resources\Shader\*.*</Command>
     </ClCompile>
     <ClCompile Include="RootSignature.cpp" />
     <ClCompile Include="Shader.cpp" />
+    <ClCompile Include="Singleton.cpp" />
     <ClCompile Include="SwapChain.cpp" />
   </ItemGroup>
   <ItemGroup>
