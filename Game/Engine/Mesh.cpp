@@ -2,6 +2,7 @@
 #include "Mesh.h"
 
 #include "CommandQueue.h"
+#include "ConstantBuffer.h"
 #include "Device.h"
 #include "Engine.h"
 
@@ -37,6 +38,9 @@ void Mesh::Render()
 {
 	CMDQUEUE->GetCmdList()->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
 	CMDQUEUE->GetCmdList()->IASetVertexBuffers(0, 1, &_vertexBufferView);
+
+	CONSTANTBUFFER->PushData(0, &_transform, sizeof(_transform));
+	CONSTANTBUFFER->PushData(1, &_transform, sizeof(_transform));
 
 	//CMDQUEUE->GetCmdList()->SetGraphicsRootConstantBufferView(0, );
 

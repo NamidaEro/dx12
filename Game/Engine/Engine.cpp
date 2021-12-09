@@ -5,6 +5,7 @@
 #include "Device.h"
 #include "SwapChain.h"
 #include "RootSignature.h"
+#include "ConstantBuffer.h"
 
 void Engine::Awake()
 {
@@ -12,6 +13,7 @@ void Engine::Awake()
 	_cmdQueue = make_shared<CommandQueue>();
 	_swapChain = make_shared<SwapChain>();
 	_rootSignature = make_shared<RootSignature>();
+	_cb = make_shared<ConstantBuffer>();
 }
 
 void Engine::Init(const WindowInfo& window)
@@ -32,6 +34,7 @@ void Engine::Init(const WindowInfo& window)
 	Instance().GetCommandQueue()->Init();
 	Instance().GetSwapChain()->Init(_window);
 	Instance().GetSignature()->Init();
+	Instance().GetConstantBuffer()->Init(sizeof(Transform), 256);
 }
 
 void Engine::Render()

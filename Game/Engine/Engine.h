@@ -4,6 +4,7 @@ class Device;
 class CommandQueue;
 class SwapChain;
 class RootSignature;
+class ConstantBuffer;
 class EXPORTCLASS Engine : public Singleton<Engine>
 {
 public:
@@ -16,6 +17,7 @@ public:
 	const shared_ptr<CommandQueue>			GetCommandQueue() { return _cmdQueue; }
 	const shared_ptr<SwapChain>				GetSwapChain() { return _swapChain;	}
 	const shared_ptr<RootSignature>			GetSignature() { return _rootSignature; }
+	const shared_ptr<ConstantBuffer>		GetConstantBuffer() { return _cb; }
 
 public:
 	void RenderBegin();
@@ -32,5 +34,6 @@ private:
 	shared_ptr<CommandQueue>				_cmdQueue;
 	shared_ptr<SwapChain>					_swapChain;
 	shared_ptr<RootSignature>				_rootSignature;
+	shared_ptr<ConstantBuffer>				_cb;
 };
 

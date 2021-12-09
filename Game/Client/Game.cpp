@@ -42,7 +42,22 @@ void Game::Update()
 	Engine::Instance().RenderBegin();
 
 	shader->Update();
-	mesh->Render();
+
+	{
+		Transform t;
+		t.offset = vector4(0.75f, 0.f, 0.f, 0.f);
+		mesh->SetTransform(t);
+
+		mesh->Render();
+	}
+
+	{
+		Transform t;
+		t.offset = vector4(0.f, 0.75f, 0.f, 0.f);
+		mesh->SetTransform(t);
+
+		mesh->Render();
+	}
 
 	Engine::Instance().RenderEnd();
 }

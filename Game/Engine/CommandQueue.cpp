@@ -1,6 +1,7 @@
 #include "pch.h"
 #include "CommandQueue.h"
 
+#include "ConstantBuffer.h"
 #include "Device.h"
 #include "Engine.h"
 #include "RootSignature.h"
@@ -57,6 +58,8 @@ void CommandQueue::RenderBegin(const D3D12_VIEWPORT* vp, const D3D12_RECT* rect)
 		D3D12_RESOURCE_STATE_RENDER_TARGET);
 
 	_cmdList->SetGraphicsRootSignature(SIGNATURE->GetSignature().Get());
+
+	CONSTANTBUFFER->Clear();
 
 	_cmdList->ResourceBarrier(1, &barrier);
 

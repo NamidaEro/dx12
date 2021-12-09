@@ -64,6 +64,11 @@ struct Vertex
 	vector4 color;
 };
 
+struct Transform
+{
+	vector4 offset;
+};
+
 enum
 {
 	SWAP_CHAIN_BUFFER_COUNT = 2
