@@ -6,12 +6,16 @@
 
 void RootSignature::Init()
 {
-	CD3DX12_ROOT_PARAMETER param[2];
-	param[0].InitAsConstantBufferView(0);
-	param[1].InitAsConstantBufferView(1);
+	CD3DX12_DESCRIPTOR_RANGE ranges[] =
+	{
+		CD3DX12_DESCRIPTOR_RANGE(D3D12_DESCRIPTOR_RANGE_TYPE_CBV, CBV_REGISTER_COUNT, 0)
+	};
+
+	CD3DX12_ROOT_PARAMETER param[1];
+	param[0].InitAsDescriptorTable(_countof(ranges), ranges);
 
 
-	D3D12_ROOT_SIGNATURE_DESC desc = CD3DX12_ROOT_SIGNATURE_DESC(2, param);
+	D3D12_ROOT_SIGNATURE_DESC desc = CD3DX12_ROOT_SIGNATURE_DESC(_countof(param), param);
 	desc.Flags = D3D12_ROOT_SIGNATURE_FLAG_ALLOW_INPUT_ASSEMBLER_INPUT_LAYOUT;
 
 	ComPtr<ID3DBlob> blobSignature;

@@ -5,6 +5,7 @@ class CommandQueue;
 class SwapChain;
 class RootSignature;
 class ConstantBuffer;
+class TableDescriptorHeap;
 class EXPORTCLASS Engine : public Singleton<Engine>
 {
 public:
@@ -13,11 +14,12 @@ public:
 	void Render();
 
 public:
-	const shared_ptr<Device>				GetDeivce() { return _device; }
-	const shared_ptr<CommandQueue>			GetCommandQueue() { return _cmdQueue; }
-	const shared_ptr<SwapChain>				GetSwapChain() { return _swapChain;	}
-	const shared_ptr<RootSignature>			GetSignature() { return _rootSignature; }
-	const shared_ptr<ConstantBuffer>		GetConstantBuffer() { return _cb; }
+	shared_ptr<Device>					GetDeivce() const { return _device; }
+	shared_ptr<CommandQueue>			GetCommandQueue() const { return _cmdQueue; }
+	shared_ptr<SwapChain>				GetSwapChain() const { return _swapChain;	}
+	shared_ptr<RootSignature>			GetSignature() const  { return _rootSignature; }
+	shared_ptr<ConstantBuffer>			GetConstantBuffer() const { return _cb; }
+	shared_ptr<TableDescriptorHeap>		GetTableDescHeap() const { return _tableDescHealp; }
 
 public:
 	void RenderBegin();
@@ -26,14 +28,15 @@ public:
 	void ResizeWindow(int32 width, int32 height);
 
 private:
-	WindowInfo								_window;
+	WindowInfo								_window = {};
 	D3D12_VIEWPORT							_viewport = {};
 	D3D12_RECT								_scissorRect = {};
 
-	shared_ptr<Device>						_device;
-	shared_ptr<CommandQueue>				_cmdQueue;
-	shared_ptr<SwapChain>					_swapChain;
-	shared_ptr<RootSignature>				_rootSignature;
-	shared_ptr<ConstantBuffer>				_cb;
+	shared_ptr<Device>						_device = nullptr;
+	shared_ptr<CommandQueue>				_cmdQueue = nullptr;
+	shared_ptr<SwapChain>					_swapChain = nullptr;
+	shared_ptr<RootSignature>				_rootSignature = nullptr;
+	shared_ptr<ConstantBuffer>				_cb = nullptr;
+	shared_ptr<TableDescriptorHeap>			_tableDescHealp = nullptr;
 };
 

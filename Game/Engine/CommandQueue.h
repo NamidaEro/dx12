@@ -7,11 +7,11 @@ public:
 	void Init();
 	void WaitSync();
 
-	void RenderBegin(const D3D12_VIEWPORT* vp, const D3D12_RECT* rect);
+	void RenderBegin(const D3D12_VIEWPORT* vp, const D3D12_RECT* rect) const;
 	void RenderEnd();
 
-	const ComPtr<ID3D12CommandQueue> GetCmdQueue() { return _cmdQueue; }
-	const ComPtr<ID3D12GraphicsCommandList>	GetCmdList() { return _cmdList; }
+	ComPtr<ID3D12CommandQueue> GetCmdQueue() const { return _cmdQueue; }
+	ComPtr<ID3D12GraphicsCommandList>	GetCmdList() const { return _cmdList; }
 
 	~CommandQueue();
 

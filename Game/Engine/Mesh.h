@@ -4,7 +4,7 @@ class EXPORTCLASS Mesh
 {
 public:
 	void Init(vector<Vertex>& vec);
-	void Render();
+	void Render() const;
 
 	void SetTransform(const Transform& t) { _transform = t; }
 

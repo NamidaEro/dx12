@@ -6,20 +6,19 @@
 #include "Engine.h"
 #include "RootSignature.h"
 #include "SwapChain.h"
+#include "TableDescriptorHeap.h"
 
 void CommandQueue::Init()
 {
 	D3D12_COMMAND_QUEUE_DESC queueDesc = {};
 	queueDesc.Type = D3D12_COMMAND_LIST_TYPE_DIRECT;
 	queueDesc.Flags = D3D12_COMMAND_QUEUE_FLAG_NONE;
-
-	auto device = DEVICE->GetDevice();
 	
-	device->CreateCommandQueue(&queueDesc, IID_PPV_ARGS(&_cmdQueue));
+	DEVICE->GetDevice()->CreateCommandQueue(&queueDesc, IID_PPV_ARGS(&_cmdQueue));
 
-	device->CreateCommandAllocator(D3D12_COMMAND_LIST_TYPE_DIRECT, IID_PPV_ARGS(&_cmdAlloc));
+	DEVICE->GetDevice()->CreateCommandAllocator(D3D12_COMMAND_LIST_TYPE_DIRECT, IID_PPV_ARGS(&_cmdAlloc));
 
-	device->CreateCommandList(
+	DEVICE->GetDevice()->CreateCommandList(
 		0
 		, D3D12_COMMAND_LIST_TYPE_DIRECT
 		, _cmdAlloc.Get()
@@ -29,7 +28,7 @@ void CommandQueue::Init()
 
 	_cmdList->Close();
 
-	device->CreateFence(0, D3D12_FENCE_FLAG_NONE, IID_PPV_ARGS(&_fence));
+	DEVICE->GetDevice()->CreateFence(0, D3D12_FENCE_FLAG_NONE, IID_PPV_ARGS(&_fence));
 	_fenceEvent = ::CreateEvent(nullptr, FALSE, FALSE, nullptr);
 }
 
@@ -47,12 +46,12 @@ void CommandQueue::WaitSync()
 	}
 }
 
-void CommandQueue::RenderBegin(const D3D12_VIEWPORT* vp, const D3D12_RECT* rect)
+void CommandQueue::RenderBegin(const D3D12_VIEWPORT* vp, const D3D12_RECT* rect) const
 {
 	_cmdAlloc->Reset();
 	_cmdList->Reset(_cmdAlloc.Get(), nullptr);
 
-	D3D12_RESOURCE_BARRIER barrier = CD3DX12_RESOURCE_BARRIER::Transition(
+	const D3D12_RESOURCE_BARRIER barrier = CD3DX12_RESOURCE_BARRIER::Transition(
 		SWAPCHAIN->GetBackRTVBuffer().Get(),
 		D3D12_RESOURCE_STATE_PRESENT,
 		D3D12_RESOURCE_STATE_RENDER_TARGET);
@@ -60,20 +59,24 @@ void CommandQueue::RenderBegin(const D3D12_VIEWPORT* vp, const D3D12_RECT* rect)
 	_cmdList->SetGraphicsRootSignature(SIGNATURE->GetSignature().Get());
 
 	CONSTANTBUFFER->Clear();
+	TABLEDESCHEAP->Clear();
+
+	ID3D12DescriptorHeap* descHeap = TABLEDESCHEAP->GetDescriptorHeap().Get();
+	_cmdList->SetDescriptorHeaps(1, &descHeap);
 
 	_cmdList->ResourceBarrier(1, &barrier);
 
 	_cmdList->RSSetViewports(1, vp);
 	_cmdList->RSSetScissorRects(1, rect);
 
-	D3D12_CPU_DESCRIPTOR_HANDLE backBufferView = SWAPCHAIN->GetBackRTV();
+	const D3D12_CPU_DESCRIPTOR_HANDLE backBufferView = SWAPCHAIN->GetBackRTV();
 	_cmdList->ClearRenderTargetView(backBufferView, Colors::LightSteelBlue, 0, nullptr);
 	_cmdList->OMSetRenderTargets(1, &backBufferView, FALSE, nullptr);
 }
 
 void CommandQueue::RenderEnd()
 {
-	D3D12_RESOURCE_BARRIER barrier = CD3DX12_RESOURCE_BARRIER::Transition(
+	const D3D12_RESOURCE_BARRIER barrier = CD3DX12_RESOURCE_BARRIER::Transition(
 		SWAPCHAIN->GetBackRTVBuffer().Get(),
 		D3D12_RESOURCE_STATE_RENDER_TARGET,
 		D3D12_RESOURCE_STATE_PRESENT);

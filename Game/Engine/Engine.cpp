@@ -6,6 +6,7 @@
 #include "SwapChain.h"
 #include "RootSignature.h"
 #include "ConstantBuffer.h"
+#include "TableDescriptorHeap.h"
 
 void Engine::Awake()
 {
@@ -14,6 +15,7 @@ void Engine::Awake()
 	_swapChain = make_shared<SwapChain>();
 	_rootSignature = make_shared<RootSignature>();
 	_cb = make_shared<ConstantBuffer>();
+	_tableDescHealp = make_shared<TableDescriptorHeap>();
 }
 
 void Engine::Init(const WindowInfo& window)
@@ -35,6 +37,7 @@ void Engine::Init(const WindowInfo& window)
 	Instance().GetSwapChain()->Init(_window);
 	Instance().GetSignature()->Init();
 	Instance().GetConstantBuffer()->Init(sizeof(Transform), 256);
+	Instance().GetTableDescHeap()->Init(256);
 }
 
 void Engine::Render()

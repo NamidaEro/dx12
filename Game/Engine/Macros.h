@@ -5,5 +5,6 @@
 #define SIGNATURE			Engine::Instance().GetSignature()
 #define CMDQUEUE			Engine::Instance().GetCommandQueue()
 #define CONSTANTBUFFER		Engine::Instance().GetConstantBuffer()
+#define TABLEDESCHEAP		Engine::Instance().GetTableDescHeap()
 
 

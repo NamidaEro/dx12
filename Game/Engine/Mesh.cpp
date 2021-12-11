@@ -5,6 +5,7 @@
 #include "ConstantBuffer.h"
 #include "Device.h"
 #include "Engine.h"
+#include "TableDescriptorHeap.h"
 
 void Mesh::Init(vector<Vertex>& vec)
 {
@@ -34,13 +35,22 @@ void Mesh::Init(vector<Vertex>& vec)
 	_vertexBufferView.SizeInBytes = bufferSize;
 }
 
-void Mesh::Render()
+void Mesh::Render() const
 {
 	CMDQUEUE->GetCmdList()->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
 	CMDQUEUE->GetCmdList()->IASetVertexBuffers(0, 1, &_vertexBufferView);
 
-	CONSTANTBUFFER->PushData(0, &_transform, sizeof(_transform));
-	CONSTANTBUFFER->PushData(1, &_transform, sizeof(_transform));
+	{
+		const auto handle = CONSTANTBUFFER->PushData(0, &_transform, sizeof(_transform));
+		TABLEDESCHEAP->SetCBV(handle, CBV_REGISTER::b0);
+	}
+
+	{
+		const auto handle = CONSTANTBUFFER->PushData(1, &_transform, sizeof(_transform));
+		TABLEDESCHEAP->SetCBV(handle, CBV_REGISTER::b1);
+	}
+
+	TABLEDESCHEAP->CommitTable();
 
 	//CMDQUEUE->GetCmdList()->SetGraphicsRootConstantBufferView(0, );
 
