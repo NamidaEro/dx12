@@ -7,11 +7,11 @@ public:
 	void Present();
 	void SwapIndex();
 
-	const ComPtr<IDXGISwapChain> GetSwapChain() { return _swapChain; }
-	const ComPtr<ID3D12Resource> GetRenderTarget(int32 index) { return _rtvBuffer[index]; }
+	ComPtr<IDXGISwapChain> GetSwapChain() const { return _swapChain; }
+	ComPtr<ID3D12Resource> GetRenderTarget(const int32& index) const  { return _rtvBuffer[index]; }
 	
-	const ComPtr<ID3D12Resource> GetBackRTVBuffer() { return _rtvBuffer[_backBufferIndex]; }
-	const D3D12_CPU_DESCRIPTOR_HANDLE GetBackRTV() { return _rtvHandle[_backBufferIndex]; }
+	ComPtr<ID3D12Resource> GetBackRTVBuffer() const { return _rtvBuffer[_backBufferIndex]; }
+	D3D12_CPU_DESCRIPTOR_HANDLE GetBackRTV() const { return _rtvHandle[_backBufferIndex]; }
 
 private:
 	void CreateSwapChain(const WindowInfo& window, ComPtr<IDXGIFactory> dxgi, ComPtr<ID3D12CommandQueue> cmdQueue);

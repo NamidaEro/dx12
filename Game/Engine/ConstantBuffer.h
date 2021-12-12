@@ -11,7 +11,7 @@ public:
 	void Clear();
 	D3D12_CPU_DESCRIPTOR_HANDLE PushData(const int32& rootParamIndex, const void* buffer, const uint32& size);
 
-	D3D12_GPU_VIRTUAL_ADDRESS GetGpuVirtualAddress(const uint32& index);
+	D3D12_GPU_VIRTUAL_ADDRESS GetGpuVirtualAddress(const uint32& index) const;
 	D3D12_CPU_DESCRIPTOR_HANDLE GetCpuHandle(const uint32& index);
 
 private:

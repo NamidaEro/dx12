@@ -22,10 +22,10 @@ public:
 	shared_ptr<TableDescriptorHeap>		GetTableDescHeap() const { return _tableDescHealp; }
 
 public:
-	void RenderBegin();
+	void RenderBegin() const;
 	void RenderEnd();
 
-	void ResizeWindow(int32 width, int32 height);
+	void ResizeWindow(const int32& width, const int32& height);
 
 private:
 	WindowInfo								_window = {};

@@ -53,7 +53,7 @@ D3D12_CPU_DESCRIPTOR_HANDLE ConstantBuffer::PushData(const int32& rootParamIndex
 	return cpuHandle;
 }
 
-D3D12_GPU_VIRTUAL_ADDRESS ConstantBuffer::GetGpuVirtualAddress(const uint32& index)
+D3D12_GPU_VIRTUAL_ADDRESS ConstantBuffer::GetGpuVirtualAddress(const uint32& index) const
 {
 	D3D12_GPU_VIRTUAL_ADDRESS objCBAddress = _cbvBuffer->GetGPUVirtualAddress();
 	objCBAddress += (index * _elementSize);
@@ -69,9 +69,9 @@ D3D12_CPU_DESCRIPTOR_HANDLE ConstantBuffer::GetCpuHandle(const uint32& index)
 
 void ConstantBuffer::CreateBuffer()
 {
-	uint32 bufferSize = _elementSize * _elementCount;
-	D3D12_HEAP_PROPERTIES heapProperty = CD3DX12_HEAP_PROPERTIES(D3D12_HEAP_TYPE_UPLOAD);
-	D3D12_RESOURCE_DESC desc = CD3DX12_RESOURCE_DESC::Buffer(bufferSize);
+	const uint32 bufferSize = _elementSize * _elementCount;
+	const D3D12_HEAP_PROPERTIES heapProperty = CD3DX12_HEAP_PROPERTIES(D3D12_HEAP_TYPE_UPLOAD);
+	const D3D12_RESOURCE_DESC desc = CD3DX12_RESOURCE_DESC::Buffer(bufferSize);
 
 	DEVICE->GetDevice()->CreateCommittedResource(
 		&heapProperty,
@@ -97,7 +97,7 @@ void ConstantBuffer::CreateView()
 
 	for(uint32 i = 0; i <_elementCount; ++i)
 	{
-		D3D12_CPU_DESCRIPTOR_HANDLE handle = GetCpuHandle(i);
+		const D3D12_CPU_DESCRIPTOR_HANDLE handle = GetCpuHandle(i);
 
 		D3D12_CONSTANT_BUFFER_VIEW_DESC cdesc = {};
 		cdesc.BufferLocation = _cbvBuffer->GetGPUVirtualAddress() + static_cast<uint64>(_elementSize) * i;

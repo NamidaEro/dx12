@@ -55,7 +55,7 @@ void SwapChain::CreateSwapChain(const WindowInfo& window, ComPtr<IDXGIFactory> d
 
 void SwapChain::CreateRTV(ComPtr<ID3D12Device> device)
 {
-	int32 rtvHeapSize = device->GetDescriptorHandleIncrementSize(D3D12_DESCRIPTOR_HEAP_TYPE_RTV);
+	const int32 rtvHeapSize = device->GetDescriptorHandleIncrementSize(D3D12_DESCRIPTOR_HEAP_TYPE_RTV);
 
 	D3D12_DESCRIPTOR_HEAP_DESC desc;
 	desc.Type = D3D12_DESCRIPTOR_HEAP_TYPE_RTV;
@@ -65,7 +65,7 @@ void SwapChain::CreateRTV(ComPtr<ID3D12Device> device)
 
 	device->CreateDescriptorHeap(&desc, IID_PPV_ARGS(&_rtvHeap));
 
-	D3D12_CPU_DESCRIPTOR_HANDLE heapBeigin = _rtvHeap->GetCPUDescriptorHandleForHeapStart();
+	const D3D12_CPU_DESCRIPTOR_HANDLE heapBeigin = _rtvHeap->GetCPUDescriptorHandleForHeapStart();
 
 	for (int i = 0; i < SWAP_CHAIN_BUFFER_COUNT; ++i)
 	{

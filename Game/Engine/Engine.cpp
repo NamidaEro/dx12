@@ -47,7 +47,7 @@ void Engine::Render()
 	RenderEnd();
 }
 
-void Engine::RenderBegin()
+void Engine::RenderBegin() const
 {
 	Instance().GetCommandQueue()->RenderBegin(&_viewport, &_scissorRect);
 }
@@ -57,7 +57,7 @@ void Engine::RenderEnd()
 	Instance().GetCommandQueue()->RenderEnd();
 }
 
-void Engine::ResizeWindow(int32 width, int32 height)
+void Engine::ResizeWindow(const int32& width, const int32& height)
 {
 	_window.width = width;
 	_window.height = height;

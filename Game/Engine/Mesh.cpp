@@ -10,10 +10,10 @@
 void Mesh::Init(vector<Vertex>& vec)
 {
 	_vertexCount = static_cast<uint32>(vec.size());
-	uint32 bufferSize = _vertexCount * sizeof(Vertex);
+	const uint32 bufferSize = _vertexCount * sizeof(Vertex);
 
-	D3D12_HEAP_PROPERTIES heapProperty = CD3DX12_HEAP_PROPERTIES(D3D12_HEAP_TYPE_UPLOAD);
-	D3D12_RESOURCE_DESC desc = CD3DX12_RESOURCE_DESC::Buffer(bufferSize);
+	const D3D12_HEAP_PROPERTIES heapProperty = CD3DX12_HEAP_PROPERTIES(D3D12_HEAP_TYPE_UPLOAD);
+	const D3D12_RESOURCE_DESC desc = CD3DX12_RESOURCE_DESC::Buffer(bufferSize);
 
 	DEVICE->GetDevice()->CreateCommittedResource(
 		&heapProperty,
@@ -25,7 +25,7 @@ void Mesh::Init(vector<Vertex>& vec)
 	);
 
 	void* vertexDataBuffer = nullptr;
-	CD3DX12_RANGE readRange(0, 0);
+	const CD3DX12_RANGE readRange(0, 0);
 	_vertexBuffer->Map(0, &readRange, &vertexDataBuffer);
 	::memcpy(vertexDataBuffer, &vec[0], bufferSize);
 	_vertexBuffer->Unmap(0, nullptr);

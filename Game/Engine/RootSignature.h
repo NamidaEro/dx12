@@ -5,7 +5,7 @@ class RootSignature
 public:
 	void Init();
 
-	const ComPtr<ID3D12RootSignature> GetSignature() { return _signature; }
+	ComPtr<ID3D12RootSignature> GetSignature() const { return _signature; }
 
 private:
 	ComPtr<ID3D12RootSignature> _signature;
