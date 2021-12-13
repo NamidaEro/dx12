@@ -1,7 +1,7 @@
 #pragma once
 
 
-class Texture
+class EXPORTCLASS Texture
 {
 public:
 	void Init(const wstring& path);

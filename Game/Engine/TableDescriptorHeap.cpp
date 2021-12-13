@@ -37,6 +37,18 @@ void TableDescriptorHeap::SetCBV(const D3D12_CPU_DESCRIPTOR_HANDLE& handle, cons
 		D3D12_DESCRIPTOR_HEAP_TYPE_CBV_SRV_UAV);
 }
 
+void TableDescriptorHeap::SetSRV(const D3D12_CPU_DESCRIPTOR_HANDLE& handle, const SRV_REGISTER& reg) const
+{
+	const D3D12_CPU_DESCRIPTOR_HANDLE destHandle = GetCPUHandle(reg);
+
+	constexpr uint32 destRange = 1;
+	constexpr uint32 srcRange = 1;
+	DEVICE->GetDevice()->CopyDescriptors(
+		1, &destHandle, &destRange,
+		1, &handle, &srcRange,
+		D3D12_DESCRIPTOR_HEAP_TYPE_CBV_SRV_UAV);
+}
+
 void TableDescriptorHeap::CommitTable()
 {
 	D3D12_GPU_DESCRIPTOR_HANDLE handle = _descHeap->GetGPUDescriptorHandleForHeapStart();
@@ -48,10 +60,15 @@ void TableDescriptorHeap::CommitTable()
 
 D3D12_CPU_DESCRIPTOR_HANDLE TableDescriptorHeap::GetCPUHandle(const CBV_REGISTER& reg) const
 {
-	return GetCPUHandle(static_cast<uint32>(reg));
+	return GetCPUHandle(static_cast<uint8>(reg));
 }
 
-D3D12_CPU_DESCRIPTOR_HANDLE TableDescriptorHeap::GetCPUHandle(const uint32& reg) const
+D3D12_CPU_DESCRIPTOR_HANDLE TableDescriptorHeap::GetCPUHandle(const SRV_REGISTER& reg) const
+{
+	return GetCPUHandle(static_cast<uint8>(reg));
+}
+
+D3D12_CPU_DESCRIPTOR_HANDLE TableDescriptorHeap::GetCPUHandle(const uint8& reg) const
 {
 	D3D12_CPU_DESCRIPTOR_HANDLE handle = _descHeap->GetCPUDescriptorHandleForHeapStart();
 	handle.ptr += _currentGroupIndex * _groupSize;

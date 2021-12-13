@@ -7,14 +7,16 @@ public:
 
 	void Clear();
 	void SetCBV(const D3D12_CPU_DESCRIPTOR_HANDLE& handle, const CBV_REGISTER& reg) const;
+	void SetSRV(const D3D12_CPU_DESCRIPTOR_HANDLE& handle, const SRV_REGISTER& reg) const;
 	void CommitTable();
 
 	ComPtr<ID3D12DescriptorHeap> GetDescriptorHeap() const { return _descHeap; }
 
 	D3D12_CPU_DESCRIPTOR_HANDLE GetCPUHandle(const CBV_REGISTER& reg) const;
+	D3D12_CPU_DESCRIPTOR_HANDLE GetCPUHandle(const SRV_REGISTER& reg) const;
 
 private:
-	D3D12_CPU_DESCRIPTOR_HANDLE GetCPUHandle(const uint32& reg) const;
+	D3D12_CPU_DESCRIPTOR_HANDLE GetCPUHandle(const uint8& reg) const;
 
 private:
 	ComPtr<ID3D12DescriptorHeap>	_descHeap = nullptr;

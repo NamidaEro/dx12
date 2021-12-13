@@ -33,7 +33,6 @@ void CommandQueue::Init()
 		, nullptr
 		, IID_PPV_ARGS(&_resCmdList)
 	);
-	_resCmdList->Close();
 	
 	DEVICE->GetDevice()->CreateFence(0, D3D12_FENCE_FLAG_NONE, IID_PPV_ARGS(&_fence));
 	_fenceEvent = ::CreateEvent(nullptr, FALSE, FALSE, nullptr);

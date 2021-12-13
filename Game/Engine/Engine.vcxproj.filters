@@ -25,9 +25,6 @@
     <ClInclude Include="d3dx12.h">
       <Filter>Utils</Filter>
     </ClInclude>
-    <ClInclude Include="Macros.h">
-      <Filter>Utils</Filter>
-    </ClInclude>
     <ClInclude Include="EnginePch.h">
       <Filter>Utils</Filter>
     </ClInclude>
@@ -61,8 +58,17 @@
     <ClInclude Include="TableDescriptorHeap.h">
       <Filter>Engine</Filter>
     </ClInclude>
-    <ClInclude Include="Texture.h">
+    <ClInclude Include="Enums.h">
       <Filter>Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="Struct.h">
+      <Filter>Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="Macros.h">
+      <Filter>Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="Texture.h">
+      <Filter>Resource</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -106,7 +112,7 @@
       <Filter>Engine</Filter>
     </ClCompile>
     <ClCompile Include="Texture.cpp">
-      <Filter>Engine</Filter>
+      <Filter>Resource</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -6,7 +6,6 @@
 #include "Client.h"
 
 #include "Game.h"
-#include  "Macros.h"
 
 #define MAX_LOADSTRING 100
 

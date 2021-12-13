@@ -6,6 +6,7 @@
 #include "Device.h"
 #include "Engine.h"
 #include "TableDescriptorHeap.h"
+#include "Texture.h"
 
 void Mesh::Init(const vector<Vertex>& vertexBuffer, const vector<uint32>& indexbuffer)
 {
@@ -22,6 +23,8 @@ void Mesh::Render() const
 	{
 		const auto handle = CONSTANTBUFFER->PushData(0, &_transform, sizeof(_transform));
 		TABLEDESCHEAP->SetCBV(handle, CBV_REGISTER::b0);
+
+		TABLEDESCHEAP->SetSRV(_tex->GetCpuHandle(), SRV_REGISTER::t0);
 	}
 
 	/*{

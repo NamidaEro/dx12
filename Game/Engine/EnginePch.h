@@ -52,7 +52,6 @@ using namespace Microsoft::WRL;
 #pragma comment(lib, "DirectXTex\\DirectXTex.lib")
 #endif
 
-
 using int8			= __int8;
 using int16			= __int16;
 using int32			= __int32;
@@ -66,46 +65,10 @@ using vector3		= XMFLOAT3;
 using vector4		= XMFLOAT4;
 using matrix		= XMMATRIX;
 
-struct WindowInfo
-{
-	HWND	hwnd;
-	int32	width;
-	int32	height;
-	bool	isWindow;
-};
-
-struct Vertex
-{
-	vector3 pos;
-	vector4 color;
-};
-
-struct Transform
-{
-	vector4 offset;
-};
-
-enum class CBV_REGISTER
-{
-	b0,
-	b1,
-	b2,
-	b3,
-	b4,
-
-	END
-};
-
-enum
-{
-	SWAP_CHAIN_BUFFER_COUNT = 2,
-	CBV_REGISTER_COUNT = CBV_REGISTER::END,
-	REGISTER_COUNT = CBV_REGISTER::END,
-};
-
-
 
 class EXPORTCLASS Engine;
 extern Engine* GlobalEngine;
 
 #include "Macros.h"
+#include "Enums.h"
+#include "Struct.h"
