@@ -50,7 +50,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
     GWindowInfo.width = 800;
     GWindowInfo.height = 600;
     GWindowInfo.isWindow = true;
-
+    
     unique_ptr<Game> game = make_unique<Game>();
     game->Init(GWindowInfo);
 

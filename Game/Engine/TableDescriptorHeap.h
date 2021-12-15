@@ -1,6 +1,6 @@
 #pragma once
 
-class TableDescriptorHeap
+class EXPORTCLASS TableDescriptorHeap
 {
 public:
 	void Init(const uint32& count);

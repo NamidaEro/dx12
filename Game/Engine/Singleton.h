@@ -21,13 +21,13 @@ public:
 	static T& Instance()
 	{
 		std::call_once(_onceFlag
-			, []
+			, []()
 			{
 				_instance.reset(new T);
 				_instance->Awake();
 			});
 
-		return *_instance.get();
+		return *(_instance.get());
 	}
 
 private:

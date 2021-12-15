@@ -2,6 +2,7 @@
 #include "CommandQueue.h"
 
 #include "ConstantBuffer.h"
+#include "DepthStencilBuffer.h"
 #include "Device.h"
 #include "Engine.h"
 #include "RootSignature.h"
@@ -77,7 +78,10 @@ void CommandQueue::RenderBegin(const D3D12_VIEWPORT* vp, const D3D12_RECT* rect)
 
 	const D3D12_CPU_DESCRIPTOR_HANDLE backBufferView = SWAPCHAIN->GetBackRTV();
 	_cmdList->ClearRenderTargetView(backBufferView, Colors::LightSteelBlue, 0, nullptr);
-	_cmdList->OMSetRenderTargets(1, &backBufferView, FALSE, nullptr);
+
+	const D3D12_CPU_DESCRIPTOR_HANDLE dsvHandle = DSBUFFER->GetDSVCpuHandle();
+	_cmdList->OMSetRenderTargets(1, &backBufferView, FALSE, &dsvHandle);
+	_cmdList->ClearDepthStencilView(dsvHandle, D3D12_CLEAR_FLAG_DEPTH, 1.0f, 0, 0, nullptr);
 }
 
 void CommandQueue::RenderEnd()

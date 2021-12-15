@@ -1,7 +1,7 @@
 #pragma once
 
 class SwapChain;
-class CommandQueue
+class EXPORTCLASS CommandQueue
 {
 public:
 	void Init();

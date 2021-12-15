@@ -1,6 +1,6 @@
 #pragma once
 
-class Device
+class EXPORTCLASS Device
 {
 public:
 	void Init();

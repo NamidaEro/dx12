@@ -1,6 +1,6 @@
 #pragma once
 
-class SwapChain
+class EXPORTCLASS SwapChain
 {
 public:
 	void Init(const WindowInfo& window);

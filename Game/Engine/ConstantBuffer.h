@@ -1,6 +1,6 @@
 #pragma once
 
-class ConstantBuffer
+class EXPORTCLASS ConstantBuffer
 {
 public:
 	ConstantBuffer();

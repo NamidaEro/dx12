@@ -1,6 +1,6 @@
 #pragma once
 
-class RootSignature
+class EXPORTCLASS RootSignature
 {
 public:
 	void Init();

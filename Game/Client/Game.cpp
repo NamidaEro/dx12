@@ -4,6 +4,7 @@
 #include "Mesh.h"
 #include "Shader.h"
 #include "Texture.h"
+#include "CommandQueue.h"
 
 shared_ptr<Mesh> mesh = make_shared<Mesh>();
 shared_ptr<Shader> shader = make_shared<Shader>();
@@ -39,6 +40,8 @@ void Game::Init(const WindowInfo& window)
 	mesh->Init(vec, index);
 	shader->Init(L"..\\Resources\\Shader\\default.hlsli");
 	texture->Init(L"..\\Resources\\Texture\\veigar.jpg");
+
+	Engine::Instance().GetCommandQueue()->WaitSync();
 }
 
 void Game::Update()
@@ -56,7 +59,17 @@ void Game::Update()
 
 	{
 		Transform t;
-		t.offset = vector4(0.f, 0.f, 0.f, 0.f);
+		t.offset = vector4(0.25f, 0.25f, 0.f, 0.f);
+		mesh->SetTransform(t);
+
+		mesh->SetTexture(texture);
+
+		mesh->Render();
+	}
+
+	{
+		Transform t;
+		t.offset = vector4(0.f, 0.f, 0.4f, 0.f);
 		mesh->SetTransform(t);
 
 		mesh->SetTexture(texture);

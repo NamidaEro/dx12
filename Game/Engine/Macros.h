@@ -6,5 +6,6 @@
 #define CMDQUEUE			Engine::Instance().GetCommandQueue()
 #define CONSTANTBUFFER		Engine::Instance().GetConstantBuffer()
 #define TABLEDESCHEAP		Engine::Instance().GetTableDescHeap()
+#define DSBUFFER			Engine::Instance().GetDepthStencilBuffer()
 
 
