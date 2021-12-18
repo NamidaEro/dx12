@@ -23,10 +23,10 @@ public:
 		std::call_once(_onceFlag
 			, []()
 			{
-				_instance.reset(new T);
-				_instance->Awake();
+				if(_instance == nullptr)
+				    _instance.reset(new T);
 			});
-
+		
 		return *(_instance.get());
 	}
 

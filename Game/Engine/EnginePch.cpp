@@ -3,4 +3,9 @@
 
 #include "Engine.h"
 
-Engine* GlobalEngine = &(Engine::Instance());
+unique_ptr<Engine> g_engine = make_unique<Engine>();
+
+Engine& GEngine()
+{
+    return *(g_engine.get());
+}

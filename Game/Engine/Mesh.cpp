@@ -27,16 +27,7 @@ void Mesh::Render() const
 		TABLEDESCHEAP->SetSRV(_tex->GetCpuHandle(), SRV_REGISTER::t0);
 	}
 
-	/*{
-		const auto handle = CONSTANTBUFFER->PushData(1, &_transform, sizeof(_transform));
-		TABLEDESCHEAP->SetCBV(handle, CBV_REGISTER::b1);
-	}*/
-
 	TABLEDESCHEAP->CommitTable();
-
-	//CMDQUEUE->GetCmdList()->SetGraphicsRootConstantBufferView(0, );
-
-	//CMDQUEUE->GetCmdList()->DrawInstanced(_vertexCount, 1, 0, 0);
 
 	CMDQUEUE->GetCmdList()->DrawIndexedInstanced(_indexCount, 1, 0, 0, 0);
 }

@@ -65,10 +65,12 @@ using vector3		= XMFLOAT3;
 using vector4		= XMFLOAT4;
 using matrix		= XMMATRIX;
 
-
-class EXPORTCLASS Engine;
-extern Engine* GlobalEngine;
-
 #include "Macros.h"
 #include "Enums.h"
 #include "Struct.h"
+
+class EXPORTCLASS Engine;
+extern EXPORTCLASS unique_ptr<Engine> g_engine;
+
+EXPORTCLASS
+Engine& GEngine();

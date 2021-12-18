@@ -1,6 +1,8 @@
 #include "pch.h"
 #include "Engine.h"
 
+#include <iostream>
+
 #include "CommandQueue.h"
 #include "Device.h"
 #include "SwapChain.h"
@@ -9,16 +11,27 @@
 #include "TableDescriptorHeap.h"
 #include "DepthStencilBuffer.h"
 
+Engine::Engine()
+    : _device(make_shared<Device>()),
+    _cmdQueue(make_shared<CommandQueue>()),
+	_swapChain(make_shared<SwapChain>()),
+	_rootSignature(make_shared<RootSignature>()),
+	_cb(make_shared<ConstantBuffer>()),
+	_tableDescHealp(make_shared<TableDescriptorHeap>()),
+	_depthStencilBuffer(make_shared<DepthStencilBuffer>())
+{
+
+}
 
 void Engine::Awake()
 {
-	_device = make_shared<Device>();
+	/*_device = make_shared<Device>();
 	_cmdQueue = make_shared<CommandQueue>();
 	_swapChain = make_shared<SwapChain>();
 	_rootSignature = make_shared<RootSignature>();
 	_cb = make_shared<ConstantBuffer>();
 	_tableDescHealp = make_shared<TableDescriptorHeap>();
-	_depthStencilBuffer = make_shared<DepthStencilBuffer>();
+	_depthStencilBuffer = make_shared<DepthStencilBuffer>();*/
 }
 
 void Engine::Init(const WindowInfo& window)
@@ -31,7 +44,7 @@ void Engine::Init(const WindowInfo& window)
 		static_cast<FLOAT>(_window.width), static_cast<FLOAT>(_window.height)
 	};
 
-	_scissorRect = CD3DX12_RECT(0, 0, _window.width, _window.height);	
+	_scissorRect = CD3DX12_RECT(0, 0, _window.width, _window.height);
 
 	_device->Init();
 	_cmdQueue->Init();

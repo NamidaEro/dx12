@@ -1,11 +1,12 @@
 #pragma once
 
-#define DEVICE				Engine::Instance().GetDeivce()
-#define SWAPCHAIN			Engine::Instance().GetSwapChain()
-#define SIGNATURE			Engine::Instance().GetSignature()
-#define CMDQUEUE			Engine::Instance().GetCommandQueue()
-#define CONSTANTBUFFER		Engine::Instance().GetConstantBuffer()
-#define TABLEDESCHEAP		Engine::Instance().GetTableDescHeap()
-#define DSBUFFER			Engine::Instance().GetDepthStencilBuffer()
+#define ENGINE              GEngine()
+#define DEVICE				ENGINE.GetDeivce()
+#define SWAPCHAIN			ENGINE.GetSwapChain()
+#define SIGNATURE			ENGINE.GetSignature()
+#define CMDQUEUE			ENGINE.GetCommandQueue()
+#define CONSTANTBUFFER		ENGINE.GetConstantBuffer()
+#define TABLEDESCHEAP		ENGINE.GetTableDescHeap()
+#define DSBUFFER			ENGINE.GetDepthStencilBuffer()
 
 

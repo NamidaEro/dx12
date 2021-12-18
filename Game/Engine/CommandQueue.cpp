@@ -1,6 +1,8 @@
 #include "pch.h"
 #include "CommandQueue.h"
 
+#include <iostream>
+
 #include "ConstantBuffer.h"
 #include "DepthStencilBuffer.h"
 #include "Device.h"
@@ -14,7 +16,7 @@ void CommandQueue::Init()
 	D3D12_COMMAND_QUEUE_DESC queueDesc = {};
 	queueDesc.Type = D3D12_COMMAND_LIST_TYPE_DIRECT;
 	queueDesc.Flags = D3D12_COMMAND_QUEUE_FLAG_NONE;
-	
+
 	DEVICE->GetDevice()->CreateCommandQueue(&queueDesc, IID_PPV_ARGS(&_cmdQueue));
 	DEVICE->GetDevice()->CreateCommandAllocator(D3D12_COMMAND_LIST_TYPE_DIRECT, IID_PPV_ARGS(&_cmdAlloc));
 	DEVICE->GetDevice()->CreateCommandList(

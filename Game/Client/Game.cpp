@@ -12,8 +12,8 @@ shared_ptr<Texture> texture = make_shared<Texture>();
 
 void Game::Init(const WindowInfo& window)
 {
-	Engine::Instance().Init(window);
-
+	GEngine().Init(window);
+	
 	vector<Vertex> vec(4);
 	vec[0].pos = vector3(-0.5f, 0.5f, 0.5f);
 	vec[0].color = vector4(1.f, 0.f, 0.f, 1.f);
@@ -41,7 +41,7 @@ void Game::Init(const WindowInfo& window)
 	shader->Init(L"..\\Resources\\Shader\\default.hlsli");
 	texture->Init(L"..\\Resources\\Texture\\veigar.jpg");
 
-	Engine::Instance().GetCommandQueue()->WaitSync();
+	GEngine().GetCommandQueue()->WaitSync();
 }
 
 void Game::Update()
@@ -53,13 +53,15 @@ void Game::Update()
 
 	_engine->RenderEnd();*/
 
-	Engine::Instance().RenderBegin();
+
+
+	GEngine().RenderBegin();
 
 	shader->Update();
 
 	{
 		Transform t;
-		t.offset = vector4(0.25f, 0.25f, 0.f, 0.f);
+		t.offset = vector4(0.25f, 0.25f, 0.2f, 0.f);
 		mesh->SetTransform(t);
 
 		mesh->SetTexture(texture);
@@ -69,7 +71,7 @@ void Game::Update()
 
 	{
 		Transform t;
-		t.offset = vector4(0.f, 0.f, 0.4f, 0.f);
+		t.offset = vector4(-0.25f, -0.25f, 0.1f, 0.f);
 		mesh->SetTransform(t);
 
 		mesh->SetTexture(texture);
@@ -77,5 +79,5 @@ void Game::Update()
 		mesh->Render();
 	}
 
-	Engine::Instance().RenderEnd();
+	GEngine().RenderEnd();
 }

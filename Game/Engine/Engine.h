@@ -7,8 +7,11 @@ class RootSignature;
 class ConstantBuffer;
 class TableDescriptorHeap;
 class DepthStencilBuffer;
-class EXPORTCLASS Engine : public Singleton<Engine>
+class EXPORTCLASS Engine
 {
+public:
+	Engine();
+
 public:
 	void Awake();
 	void Init(const WindowInfo& window);
