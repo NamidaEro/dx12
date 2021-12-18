@@ -4,6 +4,7 @@
 #include "CommandQueue.h"
 #include "Device.h"
 #include "Engine.h"
+#include "TableDescriptorHeap.h"
 
 ConstantBuffer::ConstantBuffer()
 {
@@ -22,8 +23,10 @@ ConstantBuffer::~ConstantBuffer()
 	}
 }
 
-void ConstantBuffer::Init(const uint32& size, const uint32& count)
+void ConstantBuffer::Init(const CBV_REGISTER& reg, const uint32& size, const uint32& count)
 {
+	_reg = reg;
+
 	_elementSize = (size + 255) & ~255;
 	_elementCount = count;
 
@@ -36,22 +39,19 @@ void ConstantBuffer::Clear()
 	_currentIndex = 0;
 }
 
-D3D12_CPU_DESCRIPTOR_HANDLE ConstantBuffer::PushData(const int32& rootParamIndex, const void* buffer, const uint32& size)
+void ConstantBuffer::PushData(const void* buffer, const uint32& size)
 {
 #ifdef _DEBUG
 	assert(_currentIndex < _elementSize);
+	assert(_elementSize == ((size + 255) & ~255));
 #endif
 
 	::memcpy(&_mappedBuffer[_currentIndex * _elementSize], buffer, size);
 
 	const D3D12_CPU_DESCRIPTOR_HANDLE cpuHandle = GetCpuHandle(_currentIndex);
-
-	/*D3D12_GPU_VIRTUAL_ADDRESS address = GetGpuVirtualAddress(_currentIndex);
-	CMDQUEUE->GetCmdList()->SetGraphicsRootConstantBufferView(rootParamIndex, address);*/
+	TABLEDESCHEAP->SetCBV(cpuHandle, _reg);
 
 	_currentIndex++;
-
-	return cpuHandle;
 }
 
 D3D12_GPU_VIRTUAL_ADDRESS ConstantBuffer::GetGpuVirtualAddress(const uint32& index) const

@@ -3,22 +3,12 @@
 
 #include <iostream>
 
-#include "CommandQueue.h"
-#include "Device.h"
-#include "SwapChain.h"
-#include "RootSignature.h"
-#include "ConstantBuffer.h"
-#include "TableDescriptorHeap.h"
-#include "DepthStencilBuffer.h"
-#include "Input.h"
-#include "Timer.h"
-
 Engine::Engine()
     : _device(make_shared<Device>()),
     _cmdQueue(make_shared<CommandQueue>()),
 	_swapChain(make_shared<SwapChain>()),
 	_rootSignature(make_shared<RootSignature>()),
-	_cb(make_shared<ConstantBuffer>()),
+	//_cb(make_shared<ConstantBuffer>()),
 	_tableDescHealp(make_shared<TableDescriptorHeap>()),
 	_depthStencilBuffer(make_shared<DepthStencilBuffer>()),
     _input(make_shared<Input>()),
@@ -29,13 +19,7 @@ Engine::Engine()
 
 void Engine::Awake()
 {
-	/*_device = make_shared<Device>();
-	_cmdQueue = make_shared<CommandQueue>();
-	_swapChain = make_shared<SwapChain>();
-	_rootSignature = make_shared<RootSignature>();
-	_cb = make_shared<ConstantBuffer>();
-	_tableDescHealp = make_shared<TableDescriptorHeap>();
-	_depthStencilBuffer = make_shared<DepthStencilBuffer>();*/
+
 }
 
 void Engine::Init(const WindowInfo& window)
@@ -54,11 +38,14 @@ void Engine::Init(const WindowInfo& window)
 	_cmdQueue->Init();
 	_swapChain->Init(_window);
 	_rootSignature->Init();
-	_cb->Init(sizeof(Transform), 256);
+	//_cb->Init(sizeof(Transform), 256);
 	_tableDescHealp->Init(256);
 	_depthStencilBuffer->Init(_window);
 	_input->Init(::GetActiveWindow());
 	_timer->Init();
+
+	CreateConstantBuffer(CBV_REGISTER::b0, sizeof(Transform), 256);
+	CreateConstantBuffer(CBV_REGISTER::b1, sizeof(MaterialParams), 256);
 
 	ResizeWindow(_window.width, _window.height);
 }
@@ -106,4 +93,13 @@ void Engine::ShowFPS()
 	::wsprintf(tex, L"FPS: %d", fps);
 
 	::SetWindowText(_window.hwnd, tex);
+}
+
+void Engine::CreateConstantBuffer(const CBV_REGISTER& reg, const uint32& bufferSize, const uint32& count)
+{
+	uint8 typeInt = static_cast<uint8>(reg);
+
+	shared_ptr<ConstantBuffer> buffer = make_shared<ConstantBuffer>();
+	buffer->Init(reg, bufferSize, count);
+	_constantBuffers.push_back(buffer);
 }

@@ -6,7 +6,7 @@
 #include "Device.h"
 #include "Engine.h"
 #include "TableDescriptorHeap.h"
-#include "Texture.h"
+#include "Material.h"
 
 void Mesh::Init(const vector<Vertex>& vertexBuffer, const vector<uint32>& indexbuffer)
 {
@@ -19,13 +19,10 @@ void Mesh::Render() const
 	CMDQUEUE->GetCmdList()->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
 	CMDQUEUE->GetCmdList()->IASetVertexBuffers(0, 1, &_vertexBufferView);
 	CMDQUEUE->GetCmdList()->IASetIndexBuffer(&_indexBufferView);
+	
+	CONSTANTBUFFER(CONSTANT_BUFFER_TYPE::TRANSFORM)->PushData(&_transform, sizeof(_transform));
 
-	{
-		auto handle = CONSTANTBUFFER->PushData(0, &_transform, sizeof(_transform));
-		TABLEDESCHEAP->SetCBV(handle, CBV_REGISTER::b0);
-
-		TABLEDESCHEAP->SetSRV(_tex->GetCpuHandle(), SRV_REGISTER::t0);
-	}
+	_material->Update();
 
 	TABLEDESCHEAP->CommitTable();
 
