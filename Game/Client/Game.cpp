@@ -5,6 +5,8 @@
 #include "Shader.h"
 #include "Texture.h"
 #include "CommandQueue.h"
+#include "../Engine/Input.h"
+#include "../Engine/Timer.h"
 
 shared_ptr<Mesh> mesh = make_shared<Mesh>();
 shared_ptr<Shader> shader = make_shared<Shader>();
@@ -53,15 +55,37 @@ void Game::Update()
 
 	_engine->RenderEnd();*/
 
-
+	GEngine().Update();
+	GEngine().ShowFPS();
 
 	GEngine().RenderBegin();
 
 	shader->Update();
 
 	{
-		Transform t;
-		t.offset = vector4(0.25f, 0.25f, 0.2f, 0.f);
+		auto delta = GEngine().GetTimer()->GetDeltaTime();
+		static Transform t = {};
+
+		if(GEngine().GetInput()->GetButton(KEY_TYPE::W))
+		{
+			t.offset.y += 1.f * delta;
+		}
+
+		if (GEngine().GetInput()->GetButton(KEY_TYPE::S))
+		{
+			t.offset.y -= 1.f * delta;
+		}
+
+		if (GEngine().GetInput()->GetButton(KEY_TYPE::A))
+		{
+			t.offset.x -= 1.f * delta;
+		}
+
+		if (GEngine().GetInput()->GetButton(KEY_TYPE::D))
+		{
+			t.offset.x += 1.f * delta;
+		}
+
 		mesh->SetTransform(t);
 
 		mesh->SetTexture(texture);
@@ -69,15 +93,15 @@ void Game::Update()
 		mesh->Render();
 	}
 
-	{
-		Transform t;
-		t.offset = vector4(-0.25f, -0.25f, 0.1f, 0.f);
-		mesh->SetTransform(t);
+	//{
+	//	Transform t;
+	//	t.offset = vector4(-0.25f, -0.25f, 0.1f, 0.f);
+	//	mesh->SetTransform(t);
 
-		mesh->SetTexture(texture);
+	//	mesh->SetTexture(texture);
 
-		mesh->Render();
-	}
+	//	mesh->Render();
+	//}
 
 	GEngine().RenderEnd();
 }

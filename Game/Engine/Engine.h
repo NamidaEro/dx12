@@ -7,6 +7,8 @@ class RootSignature;
 class ConstantBuffer;
 class TableDescriptorHeap;
 class DepthStencilBuffer;
+class Input;
+class Timer;
 class EXPORTCLASS Engine
 {
 public:
@@ -24,6 +26,9 @@ public:
 	void ResizeWindow(const int32& width, const int32& height);
 
 public:
+	void Update();
+
+public:
 	shared_ptr<Device>								GetDeivce() { return _device; }
 	shared_ptr<CommandQueue>						GetCommandQueue() { return _cmdQueue; }
 	shared_ptr<SwapChain>							GetSwapChain() { return _swapChain; }
@@ -31,6 +36,12 @@ public:
 	shared_ptr<ConstantBuffer>						GetConstantBuffer() { return _cb; }
 	shared_ptr<TableDescriptorHeap>					GetTableDescHeap() { return _tableDescHealp; }
 	shared_ptr<DepthStencilBuffer>					GetDepthStencilBuffer() { return _depthStencilBuffer; }
+
+	shared_ptr<Input>								GetInput() { return _input; }
+	shared_ptr<Timer>								GetTimer() { return _timer; }
+
+public:
+	void ShowFPS();
 
 private:
 	WindowInfo										_window = {};
@@ -44,4 +55,7 @@ private:
 	shared_ptr<ConstantBuffer>						_cb;
 	shared_ptr<TableDescriptorHeap>					_tableDescHealp;
 	shared_ptr<DepthStencilBuffer>					_depthStencilBuffer;
+
+	shared_ptr<Input>								_input;
+	shared_ptr<Timer>								_timer;
 };
