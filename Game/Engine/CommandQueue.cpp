@@ -13,13 +13,15 @@
 
 void CommandQueue::Init()
 {
+	const auto device = DEVICE->GetDevice();
+
 	D3D12_COMMAND_QUEUE_DESC queueDesc = {};
 	queueDesc.Type = D3D12_COMMAND_LIST_TYPE_DIRECT;
 	queueDesc.Flags = D3D12_COMMAND_QUEUE_FLAG_NONE;
 
-	DEVICE->GetDevice()->CreateCommandQueue(&queueDesc, IID_PPV_ARGS(&_cmdQueue));
-	DEVICE->GetDevice()->CreateCommandAllocator(D3D12_COMMAND_LIST_TYPE_DIRECT, IID_PPV_ARGS(&_cmdAlloc));
-	DEVICE->GetDevice()->CreateCommandList(
+	device->CreateCommandQueue(&queueDesc, IID_PPV_ARGS(&_cmdQueue));
+	device->CreateCommandAllocator(D3D12_COMMAND_LIST_TYPE_DIRECT, IID_PPV_ARGS(&_cmdAlloc));
+	device->CreateCommandList(
 		0
 		, D3D12_COMMAND_LIST_TYPE_DIRECT
 		, _cmdAlloc.Get()
@@ -28,8 +30,8 @@ void CommandQueue::Init()
 	);
 	_cmdList->Close();
 	
-	DEVICE->GetDevice()->CreateCommandAllocator(D3D12_COMMAND_LIST_TYPE_DIRECT, IID_PPV_ARGS(&_resCmdAlloc));
-	DEVICE->GetDevice()->CreateCommandList(
+	device->CreateCommandAllocator(D3D12_COMMAND_LIST_TYPE_DIRECT, IID_PPV_ARGS(&_resCmdAlloc));
+	device->CreateCommandList(
 		0
 		, D3D12_COMMAND_LIST_TYPE_DIRECT
 		, _resCmdAlloc.Get()
@@ -37,7 +39,7 @@ void CommandQueue::Init()
 		, IID_PPV_ARGS(&_resCmdList)
 	);
 	
-	DEVICE->GetDevice()->CreateFence(0, D3D12_FENCE_FLAG_NONE, IID_PPV_ARGS(&_fence));
+	device->CreateFence(0, D3D12_FENCE_FLAG_NONE, IID_PPV_ARGS(&_fence));
 	_fenceEvent = ::CreateEvent(nullptr, FALSE, FALSE, nullptr);
 }
 

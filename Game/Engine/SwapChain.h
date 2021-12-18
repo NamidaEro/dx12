@@ -14,8 +14,8 @@ public:
 	D3D12_CPU_DESCRIPTOR_HANDLE GetBackRTV() const { return _rtvHandle[_backBufferIndex]; }
 
 private:
-	void CreateSwapChain(const WindowInfo& window, ComPtr<IDXGIFactory> dxgi, ComPtr<ID3D12CommandQueue> cmdQueue);
-	void CreateRTV(ComPtr<ID3D12Device> device);
+	void CreateSwapChain(const WindowInfo& window);
+	void CreateRTV();
 
 private:
 	ComPtr<IDXGISwapChain>			_swapChain = nullptr;

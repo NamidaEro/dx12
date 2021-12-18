@@ -1,6 +1,5 @@
 #pragma once
 
-class SwapChain;
 class EXPORTCLASS CommandQueue
 {
 public:

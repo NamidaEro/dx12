@@ -20,12 +20,15 @@ void Game::Init(const WindowInfo& window)
 	vec[0].pos = vector3(-0.5f, 0.5f, 0.5f);
 	vec[0].color = vector4(1.f, 0.f, 0.f, 1.f);
 	vec[0].uv = vector2(0.f, 0.f);
+
 	vec[1].pos = vector3(0.5f, 0.5f, 0.5f);
 	vec[1].color = vector4(0.f, 1.f, 0.f, 1.f);
 	vec[1].uv = vector2(1.f, 0.f);
+
 	vec[2].pos = vector3(0.5f, -0.5f, 0.5f);
 	vec[2].color = vector4(0.f, 0.f, 1.f, 1.f);
 	vec[2].uv = vector2(1.f, 1.f);
+
 	vec[3].pos = vector3(-0.5f, -0.5f, 0.5f);
 	vec[3].color = vector4(0.f, 1.f, 0.f, 1.f);
 	vec[3].uv = vector2(0.f, 1.f);
@@ -86,6 +89,8 @@ void Game::Update()
 			t.offset.x += 1.f * delta;
 		}
 
+		t.offset.z = 0.5f;
+
 		mesh->SetTransform(t);
 
 		mesh->SetTexture(texture);
@@ -93,15 +98,15 @@ void Game::Update()
 		mesh->Render();
 	}
 
-	//{
-	//	Transform t;
-	//	t.offset = vector4(-0.25f, -0.25f, 0.1f, 0.f);
-	//	mesh->SetTransform(t);
+	{
+		Transform t;
+		t.offset = vector4(0.f, 0.f, 0.f, 0.f);
+		mesh->SetTransform(t);
 
-	//	mesh->SetTexture(texture);
+		mesh->SetTexture(texture);
 
-	//	mesh->Render();
-	//}
+		mesh->Render();
+	}
 
 	GEngine().RenderEnd();
 }

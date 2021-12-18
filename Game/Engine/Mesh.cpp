@@ -21,7 +21,7 @@ void Mesh::Render() const
 	CMDQUEUE->GetCmdList()->IASetIndexBuffer(&_indexBufferView);
 
 	{
-		const auto handle = CONSTANTBUFFER->PushData(0, &_transform, sizeof(_transform));
+		auto handle = CONSTANTBUFFER->PushData(0, &_transform, sizeof(_transform));
 		TABLEDESCHEAP->SetCBV(handle, CBV_REGISTER::b0);
 
 		TABLEDESCHEAP->SetSRV(_tex->GetCpuHandle(), SRV_REGISTER::t0);
