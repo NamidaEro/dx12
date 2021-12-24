@@ -20,10 +20,6 @@ void Mesh::Render() const
 	CMDQUEUE->GetCmdList()->IASetVertexBuffers(0, 1, &_vertexBufferView);
 	CMDQUEUE->GetCmdList()->IASetIndexBuffer(&_indexBufferView);
 	
-	CONSTANTBUFFER(CONSTANT_BUFFER_TYPE::TRANSFORM)->PushData(&_transform, sizeof(_transform));
-
-	_material->Update();
-
 	TABLEDESCHEAP->CommitTable();
 
 	CMDQUEUE->GetCmdList()->DrawIndexedInstanced(_indexCount, 1, 0, 0, 0);

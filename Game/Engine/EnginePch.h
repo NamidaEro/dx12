@@ -74,3 +74,5 @@ extern EXPORTCLASS unique_ptr<Engine> g_engine;
 
 EXPORTCLASS
 Engine& GEngine();
+
+#pragma warning(disable: 4251)

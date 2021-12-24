@@ -3,6 +3,8 @@
 
 #include <iostream>
 
+#include "Transform.h"
+
 Engine::Engine()
     : _device(make_shared<Device>()),
     _cmdQueue(make_shared<CommandQueue>()),
@@ -38,13 +40,13 @@ void Engine::Init(const WindowInfo& window)
 	_cmdQueue->Init();
 	_swapChain->Init(_window);
 	_rootSignature->Init();
-	//_cb->Init(sizeof(Transform), 256);
+	//_cb->Init(sizeof(MatrixTransform), 256);
 	_tableDescHealp->Init(256);
 	_depthStencilBuffer->Init(_window);
 	_input->Init(::GetActiveWindow());
 	_timer->Init();
 
-	CreateConstantBuffer(CBV_REGISTER::b0, sizeof(Transform), 256);
+	CreateConstantBuffer(CBV_REGISTER::b0, sizeof(MatrixTransform), 256);
 	CreateConstantBuffer(CBV_REGISTER::b1, sizeof(MaterialParams), 256);
 
 	ResizeWindow(_window.width, _window.height);

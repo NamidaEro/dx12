@@ -31,13 +31,14 @@ public:
 	void Render();
 
 public:
+	void Update();
+	void LateUpdate();
+
+public:
 	void RenderBegin() const;
 	void RenderEnd();
 
 	void ResizeWindow(const int32& width, const int32& height);
-
-public:
-	void Update();
 
 public:
 	shared_ptr<Device>								GetDeivce() { return _device; }

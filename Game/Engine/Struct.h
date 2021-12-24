@@ -14,8 +14,3 @@ struct Vertex
 	vector4 color;
 	vector2 uv;
 };
-
-struct Transform
-{
-	vector4 offset;
-};

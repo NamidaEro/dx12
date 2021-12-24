@@ -7,8 +7,10 @@
 #include "CommandQueue.h"
 #include "Input.h"
 #include "Timer.h"
+#include "GameObject.h"
+#include "MeshRenderer.h"
 
-shared_ptr<Mesh> mesh = make_shared<Mesh>();
+shared_ptr<GameObject> gameObject = make_shared<GameObject>();
 
 void Game::Init(const WindowInfo& window)
 {
@@ -40,78 +42,39 @@ void Game::Init(const WindowInfo& window)
 	index.push_back(2);
 	index.push_back(3);
 
-	mesh->Init(vec, index);
+	gameObject->Init();
 
-	shared_ptr<Shader> shader = make_shared<Shader>();
-	shared_ptr<Texture> texture = make_shared<Texture>();
+	shared_ptr<MeshRenderer> meshRenderer = make_shared<MeshRenderer>();
 
-	shader->Init(L"..\\Resources\\Shader\\default.hlsli");
-	texture->Init(L"..\\Resources\\Texture\\veigar.jpg");
+	{
+		shared_ptr<Mesh> mesh = make_shared<Mesh>();
+		mesh->Init(vec, index);
+		meshRenderer->SetMesh(mesh);
+	}
 
-	shared_ptr<Material> material = make_shared<Material>();
-	material->SetShader(shader);
-	//material->SetFloat(0, 0.1f);
-	//material->SetFloat(1, 0.2f);
-	//material->SetFloat(2, 0.3f);
-	material->SetTexture(0, texture);
+	{
+		shared_ptr<Shader> shader = make_shared<Shader>();
+		shared_ptr<Texture> texture = make_shared<Texture>();
+		shader->Init(L"..\\Resources\\Shader\\default.hlsli");
+		texture->Init(L"..\\Resources\\Texture\\veigar.jpg");
+		shared_ptr<Material> material = make_shared<Material>();
+		material->SetShader(shader);
+		material->SetFloat(0, 0.3f);
+		material->SetFloat(1, 0.4f);
+		material->SetFloat(2, 0.3f);
+		material->SetTexture(0, texture);
+		meshRenderer->SetMaterial(material);
+	}
 
-	mesh->SetMaterial(material);
+	gameObject->AddComponent(meshRenderer);
 
 	GEngine().GetCommandQueue()->WaitSync();
 }
 
 void Game::Update()
 {
-	/*_engine->RenderBegin();
-
-	shader->Update();
-	mesh->Render();
-
-	_engine->RenderEnd();*/
-
 	GEngine().Update();
-	GEngine().ShowFPS();
-
 	GEngine().RenderBegin();
-	
-	{
-		auto delta = GEngine().GetTimer()->GetDeltaTime();
-		static Transform t = {};
-
-		if(GEngine().GetInput()->GetButton(KEY_TYPE::W))
-		{
-			t.offset.y += 1.f * delta;
-		}
-
-		if (GEngine().GetInput()->GetButton(KEY_TYPE::S))
-		{
-			t.offset.y -= 1.f * delta;
-		}
-
-		if (GEngine().GetInput()->GetButton(KEY_TYPE::A))
-		{
-			t.offset.x -= 1.f * delta;
-		}
-
-		if (GEngine().GetInput()->GetButton(KEY_TYPE::D))
-		{
-			t.offset.x += 1.f * delta;
-		}
-
-		t.offset.z = 0.5f;
-
-		mesh->SetTransform(t);
-
-		mesh->Render();
-	}
-
-	{
-		Transform t;
-		t.offset = vector4(0.f, 0.f, 0.f, 0.f);
-		mesh->SetTransform(t);
-
-		mesh->Render();
-	}
-
+	gameObject->Update();
 	GEngine().RenderEnd();
 }
