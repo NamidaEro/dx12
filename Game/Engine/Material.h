@@ -9,8 +9,8 @@ enum
 
 struct MaterialParams
 {
-	void SetInt(uint8 index, int32 value) { intParams[index] = value; }
-	void SetFloat(uint8 index, float value) { floatParams[index] = value; }
+	void SetInt(const uint8& index, const int32& value) { intParams[index] = value; }
+	void SetFloat(const uint8& index, const float& value) { floatParams[index] = value; }
 
 	std::array<int32, MATERIAL_INT_COUNT> intParams;
 	std::array<float, MATERIAL_FLOAT_COUNT> floatParams;
@@ -24,9 +24,9 @@ public:
 	shared_ptr<Shader> GetShader() const { return _shader; }
 
 	void SetShader(shared_ptr<Shader> shader) { _shader = shader; }
-	void SetInt(uint8 index, int32 value) { _params.SetInt(index, value); }
-	void SetFloat(uint8 index, float value) { _params.SetFloat(index, value); }
-	void SetTexture(uint8 index, shared_ptr<Texture> texture) { _textures[index] = texture; }
+	void SetInt(const uint8& index, const int32& value) { _params.SetInt(index, value); }
+	void SetFloat(const uint8& index, const float& value) { _params.SetFloat(index, value); }
+	void SetTexture(const uint8& index, shared_ptr<Texture> texture) { _textures[index] = texture; }
 
 	void Update();
 

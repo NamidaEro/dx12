@@ -14,7 +14,7 @@ void Material::Update()
 	{
 		if (_textures[i] == nullptr) { continue; }
 
-		SRV_REGISTER reg = SRV_REGISTER(static_cast<int8>(SRV_REGISTER::t0) + i);
+		const SRV_REGISTER reg = static_cast<SRV_REGISTER>(static_cast<int8>(SRV_REGISTER::t0) + i);
 		TABLEDESCHEAP->SetSRV(_textures[i]->GetCpuHandle(), reg);
 	}
 	
