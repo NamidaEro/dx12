@@ -7,9 +7,6 @@
 #include "ConstantBuffer.h"
 #include "TableDescriptorHeap.h"
 #include "DepthStencilBuffer.h"
-#include "Input.h"
-#include "Timer.h"
-#include "Material.h"
 
 //class Device;
 //class CommandQueue;
@@ -50,9 +47,6 @@ public:
 	shared_ptr<TableDescriptorHeap>					GetTableDescHeap() { return _tableDescHealp; }
 	shared_ptr<DepthStencilBuffer>					GetDepthStencilBuffer() { return _depthStencilBuffer; }
 
-	shared_ptr<Input>								GetInput() { return _input; }
-	shared_ptr<Timer>								GetTimer() { return _timer; }
-
 public:
 	void ShowFPS();
 	void CreateConstantBuffer(const CBV_REGISTER& reg, const uint32& bufferSize, const uint32& count);
@@ -69,9 +63,6 @@ private:
 	//shared_ptr<ConstantBuffer>						_cb;
 	shared_ptr<TableDescriptorHeap>					_tableDescHealp;
 	shared_ptr<DepthStencilBuffer>					_depthStencilBuffer;
-
-	shared_ptr<Input>								_input;
-	shared_ptr<Timer>								_timer;
 
 	std::vector<shared_ptr<ConstantBuffer>>			_constantBuffers;
 };

@@ -3,8 +3,6 @@
 
 #include "Engine.h"
 #include "ConstantBuffer.h"
-#include "Texture.h"
-#include "Shader.h"
 
 void Material::Update()
 {

@@ -72,7 +72,25 @@ using matrix		= XMMATRIX;
 class EXPORTCLASS Engine;
 extern EXPORTCLASS unique_ptr<Engine> g_engine;
 
+class EXPORTCLASS SceneManager;
+extern EXPORTCLASS unique_ptr<SceneManager> g_sceneManager;
+
+class EXPORTCLASS Input;
+extern EXPORTCLASS unique_ptr<Input> g_input;
+
+class EXPORTCLASS Timer;
+extern EXPORTCLASS unique_ptr<Timer> g_timer;
+
 EXPORTCLASS
 Engine& GEngine();
+
+EXPORTCLASS
+SceneManager& GSceneManager();
+
+EXPORTCLASS
+Input& GInput();
+
+EXPORTCLASS
+Timer& GTimer();
 
 #pragma warning(disable: 4251)

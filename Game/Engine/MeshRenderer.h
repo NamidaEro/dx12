@@ -1,8 +1,8 @@
 #pragma once
 #include "Component.h"
+#include "Mesh.h"
+#include "Material.h"
 
-class Mesh;
-class Material;
 class EXPORTCLASS MeshRenderer : public Component
 {
 public:

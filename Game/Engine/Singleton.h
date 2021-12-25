@@ -23,8 +23,10 @@ public:
 		std::call_once(_onceFlag
 			, []()
 			{
-				if(_instance == nullptr)
-				    _instance.reset(new T);
+				if (_instance == nullptr)
+				{
+					_instance.reset(new T);
+				}
 			});
 		
 		return *(_instance.get());

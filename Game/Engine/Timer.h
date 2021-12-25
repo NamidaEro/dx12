@@ -1,6 +1,6 @@
 #pragma once
 
-class Timer
+class EXPORTCLASS Timer : public Singleton<Timer>
 {
 public:
     void Init();

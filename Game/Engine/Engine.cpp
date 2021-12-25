@@ -1,9 +1,13 @@
 #include "pch.h"
 #include "Engine.h"
 
-#include <iostream>
+#include "Timer.h"
+#include "Input.h"
 
+#include "Material.h"
 #include "Transform.h"
+
+#include "SceneManager.h"
 
 Engine::Engine()
     : _device(make_shared<Device>()),
@@ -12,9 +16,7 @@ Engine::Engine()
 	_rootSignature(make_shared<RootSignature>()),
 	//_cb(make_shared<ConstantBuffer>()),
 	_tableDescHealp(make_shared<TableDescriptorHeap>()),
-	_depthStencilBuffer(make_shared<DepthStencilBuffer>()),
-    _input(make_shared<Input>()),
-	_timer(make_shared<Timer>())
+	_depthStencilBuffer(make_shared<DepthStencilBuffer>())
 {
 
 }
@@ -43,8 +45,8 @@ void Engine::Init(const WindowInfo& window)
 	//_cb->Init(sizeof(MatrixTransform), 256);
 	_tableDescHealp->Init(256);
 	_depthStencilBuffer->Init(_window);
-	_input->Init(::GetActiveWindow());
-	_timer->Init();
+	GInput().Init(::GetActiveWindow());
+	GTimer().Init();
 
 	CreateConstantBuffer(CBV_REGISTER::b0, sizeof(MatrixTransform), 256);
 	CreateConstantBuffer(CBV_REGISTER::b1, sizeof(MaterialParams), 256);
@@ -55,6 +57,8 @@ void Engine::Init(const WindowInfo& window)
 void Engine::Render()
 {
 	RenderBegin();
+
+	GSceneManager().Update();
 
 	RenderEnd();
 }
@@ -83,13 +87,17 @@ void Engine::ResizeWindow(const int32& width, const int32& height)
 
 void Engine::Update()
 {
-	_input->Update();
-	_timer->Update();
+	GInput().Update();
+	GTimer().Update();
+
+	Render();
+
+	ShowFPS();
 }
 
 void Engine::ShowFPS()
 {
-	uint32 fps = _timer->GetFps();
+	uint32 fps = GTimer().GetFps();
 
 	WCHAR tex[100] = L"";
 	::wsprintf(tex, L"FPS: %d", fps);

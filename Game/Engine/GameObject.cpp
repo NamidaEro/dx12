@@ -23,10 +23,12 @@ void GameObject::Awake()
 	for (shared_ptr<Component>& component : _components)
 	{
 		if (component)
+		{
 			component->Awake();
+		}
 	}
 
-	for (shared_ptr<MonoBehaviour>& script : _scripts)
+	for (const shared_ptr<MonoBehaviour>& script : _scripts)
 	{
 		script->Awake();
 	}
@@ -37,10 +39,12 @@ void GameObject::Start()
 	for (shared_ptr<Component>& component : _components)
 	{
 		if (component)
+		{
 			component->Start();
+		}
 	}
 
-	for (shared_ptr<MonoBehaviour>& script : _scripts)
+	for (const shared_ptr<MonoBehaviour>& script : _scripts)
 	{
 		script->Start();
 	}
@@ -51,10 +55,12 @@ void GameObject::Update()
 	for (shared_ptr<Component>& component : _components)
 	{
 		if (component)
+		{
 			component->Update();
+		}
 	}
 
-	for (shared_ptr<MonoBehaviour>& script : _scripts)
+	for (const shared_ptr<MonoBehaviour>& script : _scripts)
 	{
 		script->Update();
 	}
@@ -65,10 +71,12 @@ void GameObject::LateUpdate()
 	for (shared_ptr<Component>& component : _components)
 	{
 		if (component)
+		{
 			component->LateUpdate();
+		}
 	}
 
-	for (shared_ptr<MonoBehaviour>& script : _scripts)
+	for (const shared_ptr<MonoBehaviour>& script : _scripts)
 	{
 		script->LateUpdate();
 	}
@@ -91,7 +99,7 @@ void GameObject::AddComponent(shared_ptr<Component> component)
 	}
 	else
 	{
-		auto p = static_pointer_cast<MonoBehaviour>(component);
-		_scripts.push_back(p);
+		const auto monoBehaviour = static_pointer_cast<MonoBehaviour>(component);
+		_scripts.push_back(monoBehaviour);
 	}
 }

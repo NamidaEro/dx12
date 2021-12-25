@@ -1,4 +1,6 @@
 #pragma once
+#include "Texture.h"
+#include "Shader.h"
 
 enum
 {
@@ -16,8 +18,6 @@ struct MaterialParams
 	std::array<float, MATERIAL_FLOAT_COUNT> floatParams;
 };
 
-class Texture;
-class Shader;
 class Material
 {
 public:

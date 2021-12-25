@@ -29,7 +29,7 @@ enum
     KEY_STATE_COUNT = static_cast<int32>(KEY_STATE::END)
 };
 
-class EXPORTCLASS Input
+class EXPORTCLASS Input : public Singleton<Input>
 {
 public:
     void Init(HWND hwnd);
