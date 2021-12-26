@@ -24,6 +24,7 @@ using namespace std;
 namespace fs = std::filesystem;
 
 #include "d3dx12.h"
+#include "SimpleMath.h"
 #include <d3d12.h>
 #include <wrl.h>
 #include <d3dcompiler.h>
@@ -40,6 +41,7 @@ using namespace Microsoft::WRL;
 
 #include <DirectXTex/DirectXTex.h>
 #include <DirectXTex/DirectXTex.inl>
+#include "SimpleMath.inl"
 
 #pragma comment(lib, "d3d12")
 #pragma comment(lib, "dxgi")
@@ -60,10 +62,10 @@ using uint8			= unsigned __int8;
 using uint16		= unsigned __int16;
 using uint32		= unsigned __int32;
 using uint64		= unsigned __int64;
-using vector2		= XMFLOAT2;
-using vector3		= XMFLOAT3;
-using vector4		= XMFLOAT4;
-using matrix		= XMMATRIX;
+using vector2		= DirectX::SimpleMath::Vector2;
+using vector3		= DirectX::SimpleMath::Vector3;
+using vector4		= DirectX::SimpleMath::Vector4;
+using matrix		= DirectX::SimpleMath::Matrix;
 
 #include "Macros.h"
 #include "Enums.h"
@@ -94,3 +96,4 @@ EXPORTCLASS
 Timer& GTimer();
 
 #pragma warning(disable: 4251)
+#pragma warning(disable: 4172)

@@ -28,7 +28,7 @@ public:
 	void SetFloat(const uint8& index, const float& value) { _params.SetFloat(index, value); }
 	void SetTexture(const uint8& index, shared_ptr<Texture> texture) { _textures[index] = texture; }
 
-	void Update();
+	void PushData();
 
 private:
     shared_ptr<Shader>									_shader = nullptr;

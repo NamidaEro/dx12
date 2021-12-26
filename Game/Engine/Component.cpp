@@ -3,7 +3,7 @@
 
 #include "GameObject.h"
 
-Component::Component(const COMPONENT_TYPE& type)
+Component::Component(const COMPONENT_TYPE& type) : _type(type)
 {
 }
 

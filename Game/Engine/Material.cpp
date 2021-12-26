@@ -4,7 +4,7 @@
 #include "Engine.h"
 #include "ConstantBuffer.h"
 
-void Material::Update()
+void Material::PushData()
 {
 	CONSTANTBUFFER(CONSTANT_BUFFER_TYPE::MATERIAL)->PushData(&_params, sizeof(_params));
 	

@@ -38,6 +38,7 @@ public:
 	void ResizeWindow(const int32& width, const int32& height);
 
 public:
+	const WindowInfo&								GetWindow() { return _window; }
 	shared_ptr<Device>								GetDeivce() { return _device; }
 	shared_ptr<CommandQueue>						GetCommandQueue() { return _cmdQueue; }
 	shared_ptr<SwapChain>							GetSwapChain() { return _swapChain; }

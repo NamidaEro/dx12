@@ -48,7 +48,7 @@ void Engine::Init(const WindowInfo& window)
 	GInput().Init(::GetActiveWindow());
 	GTimer().Init();
 
-	CreateConstantBuffer(CBV_REGISTER::b0, sizeof(MatrixTransform), 256);
+	CreateConstantBuffer(CBV_REGISTER::b0, sizeof(TransformParams), 256);
 	CreateConstantBuffer(CBV_REGISTER::b1, sizeof(MaterialParams), 256);
 
 	ResizeWindow(_window.width, _window.height);
@@ -58,7 +58,7 @@ void Engine::Render()
 {
 	RenderBegin();
 
-	GSceneManager().Update();
+	GSceneManager().Render();
 
 	RenderEnd();
 }
@@ -89,6 +89,7 @@ void Engine::Update()
 {
 	GInput().Update();
 	GTimer().Update();
+	GSceneManager().Update();
 
 	Render();
 
@@ -109,7 +110,7 @@ void Engine::CreateConstantBuffer(const CBV_REGISTER& reg, const uint32& bufferS
 {
 	uint8 typeInt = static_cast<uint8>(reg);
 
-	shared_ptr<ConstantBuffer> buffer = make_shared<ConstantBuffer>();
+    const shared_ptr<ConstantBuffer> buffer = make_shared<ConstantBuffer>();
 	buffer->Init(reg, bufferSize, count);
 	_constantBuffers.push_back(buffer);
 }

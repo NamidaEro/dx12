@@ -29,13 +29,13 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>DynamicLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v143</PlatformToolset>
+    <PlatformToolset>v142</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>DynamicLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
-    <PlatformToolset>v143</PlatformToolset>
+    <PlatformToolset>v142</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
@@ -48,7 +48,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>DynamicLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
-    <PlatformToolset>v143</PlatformToolset>
+    <PlatformToolset>v142</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
@@ -107,6 +107,7 @@
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <LanguageStandard>stdcpp17</LanguageStandard>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -115,6 +116,7 @@
     </Link>
     <PostBuildEvent>
       <Command>copy $(ProjectDir)*.h $(SolutionDir)Output\
+copy $(ProjectDir)*.inl $(SolutionDir)Output\
 copy $(ProjectDir)*.hlsli $(SolutionDir)Resources\Shader\
 del $(SolutionDir)Output\framework.h
 del $(SolutionDir)Output\pch.h
@@ -136,6 +138,7 @@ del $(SolutionDir)Resources\Shader\*.*</Command>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <LanguageStandard>stdcpp17</LanguageStandard>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -146,6 +149,7 @@ del $(SolutionDir)Resources\Shader\*.*</Command>
     </Link>
     <PostBuildEvent>
       <Command>copy $(ProjectDir)*.h $(SolutionDir)Output\
+copy $(ProjectDir)*.inl $(SolutionDir)Output\
 copy $(ProjectDir)*.hlsli $(SolutionDir)Resources\Shader\
 del $(SolutionDir)Output\framework.h
 del $(SolutionDir)Output\pch.h
@@ -165,6 +169,7 @@ del $(SolutionDir)Resources\Shader\*.*</Command>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <LanguageStandard>stdcpp17</LanguageStandard>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -173,6 +178,7 @@ del $(SolutionDir)Resources\Shader\*.*</Command>
     </Link>
     <PostBuildEvent>
       <Command>copy $(ProjectDir)*.h $(SolutionDir)Output\
+copy $(ProjectDir)*.inl $(SolutionDir)Output\
 copy $(ProjectDir)*.hlsli $(SolutionDir)Resources\Shader\
 del $(SolutionDir)Output\framework.h
 del $(SolutionDir)Output\pch.h
@@ -194,6 +200,7 @@ del $(SolutionDir)Resources\Shader\*.*</Command>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <LanguageStandard>stdcpp17</LanguageStandard>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -204,6 +211,7 @@ del $(SolutionDir)Resources\Shader\*.*</Command>
     </Link>
     <PostBuildEvent>
       <Command>copy $(ProjectDir)*.h $(SolutionDir)Output\
+copy $(ProjectDir)*.inl $(SolutionDir)Output\
 copy $(ProjectDir)*.hlsli $(SolutionDir)Resources\Shader\
 del $(SolutionDir)Output\framework.h
 del $(SolutionDir)Output\pch.h
@@ -215,6 +223,7 @@ del $(SolutionDir)Resources\Shader\*.*</Command>
     </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Camera.h" />
     <ClInclude Include="CommandQueue.h" />
     <ClInclude Include="Component.h" />
     <ClInclude Include="ConstantBuffer.h" />
@@ -236,15 +245,18 @@ del $(SolutionDir)Resources\Shader\*.*</Command>
     <ClInclude Include="Scene.h" />
     <ClInclude Include="SceneManager.h" />
     <ClInclude Include="Shader.h" />
+    <ClInclude Include="SimpleMath.h" />
     <ClInclude Include="Singleton.h" />
     <ClInclude Include="Struct.h" />
     <ClInclude Include="SwapChain.h" />
     <ClInclude Include="TableDescriptorHeap.h" />
+    <ClInclude Include="TestCameraScript.h" />
     <ClInclude Include="Texture.h" />
     <ClInclude Include="Timer.h" />
     <ClInclude Include="Transform.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Camera.cpp" />
     <ClCompile Include="CommandQueue.cpp" />
     <ClCompile Include="Component.cpp" />
     <ClCompile Include="ConstantBuffer.cpp" />
@@ -269,15 +281,18 @@ del $(SolutionDir)Resources\Shader\*.*</Command>
     <ClCompile Include="Scene.cpp" />
     <ClCompile Include="SceneManager.cpp" />
     <ClCompile Include="Shader.cpp" />
+    <ClCompile Include="SimpleMath.cpp" />
     <ClCompile Include="Singleton.cpp" />
     <ClCompile Include="SwapChain.cpp" />
     <ClCompile Include="TableDescriptorHeap.cpp" />
+    <ClCompile Include="TestCameraScript.cpp" />
     <ClCompile Include="Texture.cpp" />
     <ClCompile Include="Timer.cpp" />
     <ClCompile Include="Transform.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="default.hlsli" />
+    <None Include="SimpleMath.inl" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

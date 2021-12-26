@@ -14,3 +14,9 @@ struct Vertex
 	vector4 color;
 	vector2 uv;
 };
+
+
+struct TransformParams
+{
+	matrix matWVP;
+};

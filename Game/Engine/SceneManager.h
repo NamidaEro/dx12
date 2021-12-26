@@ -5,6 +5,7 @@ class EXPORTCLASS SceneManager : public Singleton<SceneManager>
 {
 public:
     void Update();
+    void Render();
     void LoadScene(const wstring& sceneName);
 
 public:
