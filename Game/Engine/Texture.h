@@ -1,8 +1,13 @@
 #pragma once
+#include "Object.h"
 
 
-class EXPORTCLASS Texture
+class EXPORTCLASS Texture : public Object
 {
+public:
+	Texture();
+	virtual ~Texture();
+
 public:
 	void Init(const wstring& path);
 

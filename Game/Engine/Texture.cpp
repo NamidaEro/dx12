@@ -5,6 +5,14 @@
 #include "Device.h"
 #include "Engine.h"
 
+Texture::Texture() : Object(OBJECT_TYPE::TEXTURE)
+{
+}
+
+Texture::~Texture()
+{
+}
+
 void Texture::Init(const wstring& path)
 {
 	CreateTexture(path);

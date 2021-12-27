@@ -4,6 +4,14 @@
 #include "Engine.h"
 #include "ConstantBuffer.h"
 
+Material::Material() : Object(OBJECT_TYPE::MATERIAL)
+{
+}
+
+Material::~Material()
+{
+}
+
 void Material::PushData()
 {
 	CONSTANTBUFFER(CONSTANT_BUFFER_TYPE::MATERIAL)->PushData(&_params, sizeof(_params));

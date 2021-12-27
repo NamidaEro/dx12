@@ -10,9 +10,17 @@ struct WindowInfo
 
 struct Vertex
 {
+	Vertex() = default;
+
+	Vertex(vector3 p, vector2 u, vector3 n, vector3 t)
+		: pos(p), uv(u), normal(n), tangent(t)
+	{
+	}
+
 	vector3 pos;
-	vector4 color;
 	vector2 uv;
+	vector3 normal;
+	vector3 tangent;
 };
 
 

@@ -1,4 +1,5 @@
 #pragma once
+#include "Object.h"
 #include "Texture.h"
 #include "Shader.h"
 
@@ -18,8 +19,12 @@ struct MaterialParams
 	std::array<float, MATERIAL_FLOAT_COUNT> floatParams;
 };
 
-class Material
+class EXPORTCLASS Material : public Object
 {
+public:
+	Material();
+	virtual ~Material();
+
 public:
 	shared_ptr<Shader> GetShader() const { return _shader; }
 

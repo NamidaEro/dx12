@@ -3,11 +3,9 @@
 
 #include "Camera.h"
 #include "Scene.h"
-
-#include "Engine.h"
-#include "GameObject.h"
-#include "MeshRenderer.h"
+#include "Resources.h"
 #include "Transform.h"
+#include "MeshRenderer.h"
 
 #include "TestCameraScript.h"
 
@@ -47,64 +45,6 @@ void SceneManager::LoadScene(const wstring& sceneName)
 shared_ptr<Scene> SceneManager::LoadTestScene()
 {
 	shared_ptr<Scene> scene = make_shared<Scene>();
-#pragma region TestObject
-	// TestObject
-    const shared_ptr<GameObject> gameObject = make_shared<GameObject>();
-
-	vector<Vertex> vec(4);
-	vec[0].pos = vector3(-0.5f, 0.5f, 0.5f);
-	vec[0].color = vector4(1.f, 0.f, 0.f, 1.f);
-	vec[0].uv = vector2(0.f, 0.f);
-	vec[1].pos = vector3(0.5f, 0.5f, 0.5f);
-	vec[1].color = vector4(0.f, 1.f, 0.f, 1.f);
-	vec[1].uv = vector2(1.f, 0.f);
-	vec[2].pos = vector3(0.5f, -0.5f, 0.5f);
-	vec[2].color = vector4(0.f, 0.f, 1.f, 1.f);
-	vec[2].uv = vector2(1.f, 1.f);
-	vec[3].pos = vector3(-0.5f, -0.5f, 0.5f);
-	vec[3].color = vector4(0.f, 1.f, 0.f, 1.f);
-	vec[3].uv = vector2(0.f, 1.f);
-
-	vector<uint32> indexVec;
-	{
-		indexVec.push_back(0);
-		indexVec.push_back(1);
-		indexVec.push_back(2);
-	}
-	{
-		indexVec.push_back(0);
-		indexVec.push_back(2);
-		indexVec.push_back(3);
-	}
-
-	gameObject->AddComponent(make_shared<Transform>());
-    const shared_ptr<Transform> transform = gameObject->GetTransform();
-	transform->SetLocalPosition(vector3(0.f, 100.f, 200.f));
-	transform->SetLocalScale(vector3(100.f, 100.f, 1.f));
-
-	shared_ptr<MeshRenderer> meshRenderer = make_shared<MeshRenderer>();
-	{
-        const shared_ptr<Mesh> mesh = make_shared<Mesh>();
-		mesh->Init(vec, indexVec);
-		meshRenderer->SetMesh(mesh);
-	}
-	{
-        const shared_ptr<Shader> shader = make_shared<Shader>();
-        const shared_ptr<Texture> texture = make_shared<Texture>();
-		shader->Init(L"..\\Resources\\Shader\\default.hlsli");
-		texture->Init(L"..\\Resources\\Texture\\veigar.jpg");
-        const shared_ptr<Material> material = make_shared<Material>();
-		material->SetShader(shader);
-		material->SetFloat(0, 0.3f);
-		material->SetFloat(1, 0.4f);
-		material->SetFloat(2, 0.3f);
-		material->SetTexture(0, texture);
-		meshRenderer->SetMaterial(material);
-	}
-	gameObject->AddComponent(meshRenderer);
-	scene->AddGameObject(gameObject);
-#pragma endregion
-
 #pragma region Camera
     const shared_ptr<GameObject> camera = make_shared<GameObject>();
 	camera->AddComponent(make_shared<Transform>());
@@ -113,6 +53,59 @@ shared_ptr<Scene> SceneManager::LoadTestScene()
 	camera->GetTransform()->SetLocalPosition(vector3(0.f, 100.f, 0.f));
 	scene->AddGameObject(camera);
 #pragma endregion
+	
+#pragma region Sphere
+	{
+        const shared_ptr<GameObject> sphere = make_shared<GameObject>();
+		sphere->AddComponent(make_shared<Transform>());
+		sphere->GetTransform()->SetLocalScale(vector3(100.f, 100.f, 100.f));
+		sphere->GetTransform()->SetLocalPosition(vector3(0.f, 100.f, 200.f));
+		shared_ptr<MeshRenderer> meshRenderer = make_shared<MeshRenderer>();
+		{
+            const shared_ptr<Mesh> sphereMesh = GResources().LoadSphereMesh();
+			meshRenderer->SetMesh(sphereMesh);
+		}
+		{
+            const shared_ptr<Shader> shader = make_shared<Shader>();
+            const shared_ptr<Texture> texture = make_shared<Texture>();
+			shader->Init(L"..\\Resources\\Shader\\default.hlsli");
+			texture->Init(L"..\\Resources\\Texture\\veigar.jpg");
+            const shared_ptr<Material> material = make_shared<Material>();
+			material->SetShader(shader);
+			material->SetTexture(0, texture);
+			meshRenderer->SetMaterial(material);
+		}
+		sphere->AddComponent(meshRenderer);
+		scene->AddGameObject(sphere);
+	}
+#pragma endregion
+
+#pragma region Cube
+	{
+        const shared_ptr<GameObject> sphere = make_shared<GameObject>();
+		sphere->AddComponent(make_shared<Transform>());
+		sphere->GetTransform()->SetLocalScale(vector3(100.f, 100.f, 100.f));
+		sphere->GetTransform()->SetLocalPosition(vector3(150.f, 100.f, 200.f));
+        const shared_ptr<MeshRenderer> meshRenderer = make_shared<MeshRenderer>();
+		{
+            const shared_ptr<Mesh> sphereMesh = GResources().LoadCubeMesh();
+			meshRenderer->SetMesh(sphereMesh);
+		}
+		{
+            const shared_ptr<Shader> shader = make_shared<Shader>();
+            const shared_ptr<Texture> texture = make_shared<Texture>();
+			shader->Init(L"..\\Resources\\Shader\\default.hlsli");
+			texture->Init(L"..\\Resources\\Texture\\veigar.jpg");
+            const shared_ptr<Material> material = make_shared<Material>();
+			material->SetShader(shader);
+			material->SetTexture(0, texture);
+			meshRenderer->SetMaterial(material);
+		}
+		sphere->AddComponent(meshRenderer);
+		scene->AddGameObject(sphere);
+	}
+#pragma endregion
+
 
 	return scene;
 }

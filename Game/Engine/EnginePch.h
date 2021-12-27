@@ -83,6 +83,9 @@ extern EXPORTCLASS unique_ptr<Input> g_input;
 class EXPORTCLASS Timer;
 extern EXPORTCLASS unique_ptr<Timer> g_timer;
 
+class EXPORTCLASS Resources;
+extern EXPORTCLASS unique_ptr<Resources> g_resources;
+
 EXPORTCLASS
 Engine& GEngine();
 
@@ -94,6 +97,9 @@ Input& GInput();
 
 EXPORTCLASS
 Timer& GTimer();
+
+EXPORTCLASS
+Resources& GResources();
 
 #pragma warning(disable: 4251)
 #pragma warning(disable: 4172)
