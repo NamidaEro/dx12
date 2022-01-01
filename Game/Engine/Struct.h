@@ -26,5 +26,9 @@ struct Vertex
 
 struct TransformParams
 {
+	matrix matWorld;
+	matrix matView;
+	matrix matProjection;
+	matrix matWV;
 	matrix matWVP;
 };

@@ -236,6 +236,7 @@ del $(SolutionDir)Resources\Shader\*.*</Command>
     <ClInclude Include="framework.h" />
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="Input.h" />
+    <ClInclude Include="Light.h" />
     <ClInclude Include="Macros.h" />
     <ClInclude Include="Material.h" />
     <ClInclude Include="Mesh.h" />
@@ -269,6 +270,7 @@ del $(SolutionDir)Resources\Shader\*.*</Command>
     <ClCompile Include="EnginePch.cpp" />
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="Input.cpp" />
+    <ClCompile Include="Light.cpp" />
     <ClCompile Include="Material.cpp" />
     <ClCompile Include="Mesh.cpp" />
     <ClCompile Include="MeshRenderer.cpp" />
@@ -296,7 +298,9 @@ del $(SolutionDir)Resources\Shader\*.*</Command>
   </ItemGroup>
   <ItemGroup>
     <None Include="default.hlsli" />
+    <None Include="params.hlsli" />
     <None Include="SimpleMath.inl" />
+    <None Include="utils.hlsli" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

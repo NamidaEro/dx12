@@ -1,17 +1,5 @@
 #pragma once
 
-enum class CONSTANT_BUFFER_TYPE : uint8
-{
-    TRANSFORM,
-	MATERIAL,
-	END
-};
-
-enum
-{
-    CONSTANT_BUFFER_COUNT = static_cast<uint8>(CONSTANT_BUFFER_TYPE::END),
-};
-
 class EXPORTCLASS ConstantBuffer
 {
 public:
@@ -22,6 +10,8 @@ public:
 
 	void Clear();
 	void PushData(const void* buffer, const uint32& size);
+
+	void SetGlobalData(const void* buffer, const uint32& size);
 
 	D3D12_GPU_VIRTUAL_ADDRESS GetGpuVirtualAddress(const uint32& index) const;
 	D3D12_CPU_DESCRIPTOR_HANDLE GetCpuHandle(const uint32& index);

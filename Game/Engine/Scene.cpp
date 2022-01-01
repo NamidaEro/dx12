@@ -1,6 +1,10 @@
 #include "pch.h"
 #include "Scene.h"
+
+#include "Engine.h"
+#include "Camera.h"
 #include "GameObject.h"
+#include "Light.h"
 
 void Scene::Awake()
 {
@@ -15,6 +19,18 @@ void Scene::Start()
 	for (const shared_ptr<GameObject>& gameObject : _gameObjects)
 	{
 		gameObject->Start();
+	}
+}
+
+void Scene::Render()
+{
+	PushLightData();
+
+	for (const shared_ptr<GameObject>& gameObject : _gameObjects)
+	{
+	    if(gameObject->GetCamera() == nullptr) { continue; }
+
+		gameObject->GetCamera()->Render();
 	}
 }
 
@@ -54,4 +70,21 @@ void Scene::RemoveGameObject(shared_ptr<GameObject> gameObject)
 	{
 		_gameObjects.erase(findIt);
 	}
+}
+
+void Scene::PushLightData()
+{
+	LightParams lightParams = {};
+
+	for(const shared_ptr<GameObject>& gameObject : _gameObjects)
+	{
+		if (gameObject->GetLight() == nullptr) { continue; }
+
+		const LightInfo& lightInfo = gameObject->GetLight()->GetLightInfo();
+
+		lightParams.lights[lightParams.lightCount] = lightInfo;
+		lightParams.lightCount++;
+	}
+
+	CONSTANTBUFFER(CONSTANT_BUFFER_TYPE::GLOBAL)->SetGlobalData(&lightParams, sizeof(lightParams));
 }

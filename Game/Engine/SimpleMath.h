@@ -351,6 +351,8 @@ namespace DirectX
             Vector4(Vector4&&) = default;
             Vector4& operator=(Vector4&&) = default;
 
+            Vector4& operator= (const Vector3& V) noexcept { x = V.x; y = V.y; z = V.z; w = 0.f; return *this; }
+
             operator XMVECTOR() const  noexcept { return XMLoadFloat4(this); }
 
             // Comparison operators

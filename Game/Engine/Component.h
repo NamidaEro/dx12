@@ -1,21 +1,6 @@
 #pragma once
 #include "Object.h"
 
-enum class COMPONENT_TYPE : uint8
-{
-	TRANSFORM,
-	MESH_RENDERER,
-	CAMERA,
-	// ...
-	MONO_BEHAVIOUR,
-	END,
-};
-
-enum
-{
-	FIXED_COMPONENT_COUNT = static_cast<uint8>(COMPONENT_TYPE::END) - 1
-};
-
 class GameObject;
 class Transform;
 class EXPORTCLASS Component : public Object
